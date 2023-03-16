@@ -4,6 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    android:background="#E9F8F9"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HEALTH TRACKER"
+        android:textColor="#181823"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fname"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fname_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="FIRST NAME"
+            android:maxLines="1"
+            android:backgroundTint="#FFFFFF"
+            android:background="@color/black"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lname"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fname">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/lname_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="LAST NAME"
+            android:maxLines="1"
+            android:backgroundTint="#FFFFFF"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/email"
+    android:layout_width="300dp"
+    android:layout_height="50dp"
+    android:padding="5dp"
+    app:endIconMode="clear_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/lname">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="EMAIL"
+        android:maxLines="1"
+        android:backgroundTint="#FFFFFF"/>
+</com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_text"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="PASSWORD"
+            android:maxLines="1"
+            android:backgroundTint="#FFFFFF"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Register"
+        android:textColor="#E9F8F9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        android:backgroundTint="#537FE7">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
