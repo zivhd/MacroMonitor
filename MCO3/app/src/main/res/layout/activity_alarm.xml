@@ -75,7 +75,7 @@
             android:tint="@android:color/white"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/alarm_btn"
+            android:id="@+id/meal_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
