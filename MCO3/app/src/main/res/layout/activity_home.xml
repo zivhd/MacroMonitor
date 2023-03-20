@@ -138,7 +138,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 <!--        MEAL-->
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/hometab"
+            android:id="@+id/mealtab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
