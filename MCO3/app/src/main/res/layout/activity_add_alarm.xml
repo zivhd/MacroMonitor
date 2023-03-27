@@ -20,9 +20,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/alarm_name"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
-
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -32,7 +31,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
             android:hint="NAME"
             android:maxLines="1"
@@ -58,7 +57,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/alarm_calories"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:padding="5dp"
 
                 app:endIconMode="clear_text"
@@ -70,7 +69,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/calories_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
                     android:hint="CALORIES"
                     android:inputType="number"
@@ -80,7 +79,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/alarm_protein"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:padding="5dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +90,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/protein_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
                     android:hint="PROTEIN"
                     android:inputType="number"
@@ -106,7 +105,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/alarm_fat"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:padding="5dp"
 
                 app:endIconMode="clear_text"
@@ -118,7 +117,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fat_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
                     android:hint="FAT"
                     android:inputType="number"
@@ -128,7 +127,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/alarm_carbs"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:padding="5dp"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +138,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/carbs_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="#FFFFFF"
                     android:hint="CARBS"
                     android:inputType="number"
