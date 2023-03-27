@@ -1,6 +1,7 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model
 
 import java.util.*
+import java.util.GregorianCalendar
 
 class Calories(var id: Int) {
     var userID: Int = 0
