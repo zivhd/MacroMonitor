@@ -37,7 +37,14 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
     }
 
     override fun removeAlarm(alarmID: Int) {
-        TODO("Not yet implemented")
+        var databaseHandlerAlarm: DatabaseHandlerAlarm = DatabaseHandlerAlarm(context)
+        val db = databaseHandlerAlarm.writableDatabase
+
+        val success = db.delete(DatabaseHandlerAlarm.tableAlarm,
+            "${DatabaseHandlerAlarm.tableAlarmID}=$alarmID",
+            null)
+
+        db.close()
     }
 
     override fun updateAlarm(alarm: alarm) {

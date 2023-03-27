@@ -5,6 +5,7 @@ import android.text.format.DateUtils.formatElapsedTime
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ItemAlarmBinding
 
@@ -30,5 +31,11 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
             itemBinding.alarmCalories.text = alarm.calories.toString()  + " Calories"
             itemBinding.alarmTime.text = formatElapsedTime(alarm.time.toLong())
         }
+    }
+    fun deleteAlarm(position: Int) {
+        val alarmDAO = AlarmDAOSQLLiteImplementation(context)
+        alarmDAO.removeAlarm(alarmList[position].id)
+        alarmList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

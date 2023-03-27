@@ -33,6 +33,11 @@ class AlarmActivity : AppCompatActivity() {
 
         binding.alarmList.adapter = alarmAdapter
 
+        var swipeCallback = SwipeCallback(0,ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+        swipeCallback.alarmAdapter = alarmAdapter
+        itemTouchHelper = ItemTouchHelper(swipeCallback)
+        itemTouchHelper.attachToRecyclerView(binding.alarmList)
+
         binding.addAlarmBtn.setOnClickListener(){
             val goToAddAlarm = Intent(this,AddAlarm::class.java)
             startActivity(goToAddAlarm)
