@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddAlarm">
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:amPmBackgroundColor="#537FE7"
+        android:headerBackground="#537FE7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:timePickerMode="spinner"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/alarm_name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#FFFFFF"
+            android:hint="NAME"
+            android:maxLines="1"
+
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_name">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/alarm_calories"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+
+                app:endIconMode="clear_text"
+
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alarm_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/calories_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="CALORIES"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/alarm_protein"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/alarm_calories"
+                app:layout_constraintTop_toBottomOf="@+id/alarm_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/protein_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="PROTEIN"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/alarm_fat"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+
+                app:endIconMode="clear_text"
+
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/alarm_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fat_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="FAT"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/alarm_carbs"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/alarm_calories"
+                app:layout_constraintTop_toBottomOf="@+id/alarm_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/carbs_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="CARBS"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save_btn"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="Save"
+            android:textColor="#E9F8F9"
+            android:backgroundTint="#537FE7">
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:background="#537FE7"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/alarmtab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#537FE7"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/alarm_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/alarm"
+                android:tint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alarmtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="ALARM"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--        HOME-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/hometab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="57dp"
+            android:background="#537FE7"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/home_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/home"
+                android:tint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hometitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="HOME"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <!--        MEAL-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/mealtab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="57dp"
+            android:background="#537FE7"
+            android:orientation="vertical"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.5">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/meal"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/meal"
+                android:tint="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mealtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MEAL LOG"
+
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

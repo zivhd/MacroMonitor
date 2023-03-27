@@ -1,9 +1,11 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import android.widget.Toast
 import kotlinx.coroutines.selects.select
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 
@@ -16,7 +18,22 @@ interface AlarmDAO{
 
 class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
     override fun addAlarm(alarm: alarm) {
-        TODO("Not yet implemented")
+        val databaseHandlerAlarm:DatabaseHandlerAlarm = DatabaseHandlerAlarm(context)
+        val db = databaseHandlerAlarm.readableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmMeal, alarm.meal)
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmCalories, alarm.calories)
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmFat, alarm.fat)
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmCarbs, alarm.carbs)
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmProtein, alarm.protein)
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmTime, alarm.time)
+        val result = db.insert(DatabaseHandlerAlarm.tableAlarm, null, contentValues)
+        if (result == (0).toLong()) {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun removeAlarm(alarmID: Int) {

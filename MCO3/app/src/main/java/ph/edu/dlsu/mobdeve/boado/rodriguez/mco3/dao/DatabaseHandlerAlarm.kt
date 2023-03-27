@@ -25,6 +25,9 @@ class DatabaseHandlerAlarm(context: Context): SQLiteOpenHelper(context, DBNAME, 
         const val tableAlarmUserID = "alarm_userid"
         const val tableAlarmMeal = "alarm_meal"
         const val tableAlarmCalories = "alarm_calories"
+        const val tableAlarmFat = "alarm_fat"
+        const val tableAlarmProtein = "alarm_protein"
+        const val tableAlarmCarbs = "alarm_carbs"
         const val tableAlarmTime = "alarm_time"
     }
 
@@ -37,13 +40,18 @@ class DatabaseHandlerAlarm(context: Context): SQLiteOpenHelper(context, DBNAME, 
                 "$tableAlarmUserID INTEGER, " +
                 "$tableAlarmMeal TEXT, " +
                 "$tableAlarmCalories INTEGER, " +
+                "$tableAlarmFat INTEGER, " +
+                "$tableAlarmProtein INTEGER, " +
+                "$tableAlarmCarbs INTEGER, " +
                 "$tableAlarmTime INTEGER )"
 
 
         db?.execSQL(createAccountsTable)
 
         // create data sample
-        db?.execSQL("INSERT INTO $tableAlarm ($tableAlarmMeal, $tableAlarmCalories, $tableAlarmTime ) VALUES ('Chicken and Broccoli', 550, 10800 )")
+        db?.execSQL("INSERT INTO $tableAlarm ($tableAlarmMeal, $tableAlarmCalories, " +
+                "$tableAlarmFat, $tableAlarmProtein, $tableAlarmCarbs, $tableAlarmTime ) " +
+                "VALUES ('Chicken and Broccoli', 550, 2, 2, 2, 10800 )")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Ahri')")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Malphite')")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Miss Fortune')")

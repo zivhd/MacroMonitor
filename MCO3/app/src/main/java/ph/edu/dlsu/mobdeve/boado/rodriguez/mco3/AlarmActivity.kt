@@ -1,5 +1,6 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -32,6 +33,10 @@ class AlarmActivity : AppCompatActivity() {
 
         binding.alarmList.adapter = alarmAdapter
 
+        binding.addAlarmBtn.setOnClickListener(){
+            val goToAddAlarm = Intent(this,AddAlarm::class.java)
+            startActivity(goToAddAlarm)
+        }
 
     }
 }
