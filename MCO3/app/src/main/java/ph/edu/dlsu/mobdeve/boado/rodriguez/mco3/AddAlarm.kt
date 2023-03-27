@@ -32,19 +32,17 @@ class AddAlarm : AppCompatActivity() {
                     binding.proteinText.text.toString().isNotEmpty() &&
                     binding.fatText.text.toString().isNotEmpty()
                     ){
-                val alarm = alarm(0)
-                alarm.calories = binding.caloriesText.text.toString().toInt()
-                alarm.meal = binding.nameText.text.toString()
-                alarm.carbs = binding.carbsText.text.toString().toInt()
-                alarm.fat = binding.fatText.text.toString().toInt()
-                alarm.protein = binding.proteinText.text.toString().toInt()
                 val hour = binding.timePicker1.currentHour * 3600
                 val minutes = binding.timePicker1.currentMinute * 60
                 val time = hour + minutes
-                alarm.time = time
-                alarmDAO.addAlarm(alarm)
-                val goToAlarm = Intent(this,AlarmActivity::class.java)
-                startActivity(goToAlarm)
+                val goToQR = Intent(this,QRCodeActivity::class.java)
+                goToQR.putExtra("calories", binding.caloriesText.text.toString())
+                goToQR.putExtra("meal",binding.nameText.text.toString())
+                goToQR.putExtra("carbs",binding.carbsText.text.toString())
+                goToQR.putExtra("fat",binding.fatText.text.toString())
+                goToQR.putExtra("protein",binding.proteinText.text.toString())
+                goToQR.putExtra("time",time.toString())
+                startActivity(goToQR)
                 finish()
             }else {
                 Toast.makeText(context, "Please Fill All Fields", Toast.LENGTH_SHORT).show()
