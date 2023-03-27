@@ -29,7 +29,7 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
         fun bindItems(alarm: alarm){
             itemBinding.alarmName.text = alarm.meal
             itemBinding.alarmCalories.text = alarm.calories.toString()  + " Calories"
-            itemBinding.alarmTime.text = formatElapsedTime(alarm.time.toLong())
+            itemBinding.alarmTime.text = convertSecondstoAMPM(alarm.time)
         }
     }
     fun deleteAlarm(position: Int) {
@@ -37,5 +37,14 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
         alarmDAO.removeAlarm(alarmList[position].id)
         alarmList.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun convertSecondstoAMPM(time : Int): String{
+        var hours = time/3600
+        var minutes = (time % 3600)/60
+
+        if(hours > 12)
+            return (hours-12).toString() +":"+ (minutes).toString() + " PM"
+        else return hours.toString()  +":"+minutes.toString() + " AM"
     }
 }
