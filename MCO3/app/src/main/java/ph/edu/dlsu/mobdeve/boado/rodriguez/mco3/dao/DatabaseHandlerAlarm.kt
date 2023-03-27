@@ -25,21 +25,25 @@ class DatabaseHandlerAlarm(context: Context): SQLiteOpenHelper(context, DBNAME, 
         const val tableAlarmUserID = "alarm_userid"
         const val tableAlarmMeal = "alarm_meal"
         const val tableAlarmCalories = "alarm_calories"
+        const val tableAlarmTime = "alarm_time"
     }
 
     override fun onCreate(db: SQLiteDatabase?){
         // creates the database
         // written in SQL
-        // note: mind the spaces
+        // note: mind the space
         val createAccountsTable = "CREATE TABLE $tableAlarm " +
                 "($tableAlarmID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$tableAlarmUserID INTEGER, " +
                 "$tableAlarmMeal TEXT, " +
-                "$tableAlarmCalories INTEGER)"
+                "$tableAlarmCalories INTEGER, " +
+                "$tableAlarmTime INTEGER )"
+
 
         db?.execSQL(createAccountsTable)
 
         // create data sample
+        db?.execSQL("INSERT INTO $tableAlarm ($tableAlarmMeal, $tableAlarmCalories, $tableAlarmTime ) VALUES ('Chicken and Broccoli', 550, 10800 )")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Ahri')")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Malphite')")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Miss Fortune')")

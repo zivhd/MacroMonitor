@@ -74,11 +74,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#537FE7"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/alarm_btn"
             android:layout_width="50dp"
@@ -110,7 +110,7 @@
             android:orientation="vertical"
             android:background="#537FE7"
             android:layout_marginLeft="57dp"
-            app:layout_constraintStarttoEndOf="@+id/alarmtab"
+
             app:layout_constraintHorizontal_bias="0.5"
 
             app:layout_constraintBottom_toBottomOf="parent">
@@ -144,7 +144,7 @@
             android:orientation="vertical"
             android:background="#537FE7"
             android:layout_marginLeft="57dp"
-            app:layout_constraintStarttoEndOf="@+id/alarmtab"
+
             app:layout_constraintHorizontal_bias="0.5"
 
             app:layout_constraintBottom_toBottomOf="parent">

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loginBtn.setOnClickListener{
-        val goToHome = Intent(this,HomeActivity::class.java)
+        val goToHome = Intent(this,AlarmActivity::class.java)
         startActivity(goToHome)
     }
     }
