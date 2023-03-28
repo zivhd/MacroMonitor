@@ -1,14 +1,18 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.User
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 
 interface UserDAO{
     fun addUser(user: User): Boolean
     fun getUsers(): ArrayList<User>
+    fun checkIfUserExists(email: String): Boolean
+    fun checkIfCredentialsMatch(email: String, password: String): Boolean
 }
 
 class UserDAOSQLLiteImplementation(var context: Context): UserDAO{
@@ -29,29 +33,45 @@ class UserDAOSQLLiteImplementation(var context: Context): UserDAO{
         return true
         db.close()
     }
+    @SuppressLint("Range")
     override fun getUsers(): ArrayList<User>{
         val userList: ArrayList<User> = ArrayList()
-        val selectQuery = "SELECT ${DatabaseHandler.tableUserEmail}, ${DatabaseHandler.tableUserID} FROM ${DatabaseHandler.tableUser}"
+        val selectQuery = "SELECT ${DatabaseHandler.tableUserEmail}, ${DatabaseHandler.tableUserID}, ${DatabaseHandler.tableUserPassword} FROM ${DatabaseHandler.tableUser}"
         val databaseHandler:DatabaseHandler = DatabaseHandler(context)
         val db = databaseHandler.readableDatabase
         var cursor: Cursor? = null
 
-        try{
-            cursor = db.rawQuery(selectQuery, null)
-        }
-        catch(e: SQLiteException){
-            db.close()
-            return ArrayList()
-        }
-
-        var user = User("")
-        if(cursor.moveToFirst()){
+        val result = db.rawQuery(selectQuery,null)
+        if(result.moveToFirst()){
             do{
-                user = User(cursor.getString(0))
-                user.id = cursor.getInt(1)
-            }while(cursor.moveToNext())
+                val user = User(" ")
+                user.id = result.getString(result.getColumnIndex(DatabaseHandler.tableUserID)).toInt()
+                user.email = result.getString(result.getColumnIndex(DatabaseHandler.tableUserEmail))
+                user.password = result.getString(result.getColumnIndex(DatabaseHandler.tableUserPassword))
+            } while(result.moveToNext())
         }
-        db.close()
         return userList
+    }
+
+    override fun checkIfUserExists(email: String): Boolean {
+        val databaseHandler:DatabaseHandler = DatabaseHandler(context)
+        val db = databaseHandler.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM ${DatabaseHandler.tableUser} where ${DatabaseHandler.tableUserEmail} = "+'"'+email+'"', null);
+        if(cursor.count < 1){
+            return false
+        }
+        return true
+    }
+
+    override fun checkIfCredentialsMatch(email: String, password: String): Boolean {
+        val databaseHandler:DatabaseHandler = DatabaseHandler(context)
+        val db = databaseHandler.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM ${DatabaseHandler.tableUser} where ${DatabaseHandler.tableUserEmail} = "+'"'+email+'"'+" AND ${DatabaseHandler.tableUserPassword} = "+'"'+password+'"', null);
+        if(cursor.count < 1){
+            return false
+        }
+        return true
     }
 }
