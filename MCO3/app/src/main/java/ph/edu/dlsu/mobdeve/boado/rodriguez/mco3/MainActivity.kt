@@ -7,6 +7,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.UserDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,10 +18,17 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val userDAO = UserDAOSQLLiteImplementation(this)
         binding.loginBtn.setOnClickListener{
-        val goToHome = Intent(this,AlarmActivity::class.java)
-        startActivity(goToHome)
+        if(userDAO.checkIfCredentialsMatch(binding.usernameText.text.toString(), binding.passwordText.text.toString()) == true){
+            Toast.makeText(this, "Successfully Logged In!", Toast.LENGTH_LONG).show()
+            val goToHome = Intent(this,AlarmActivity::class.java)
+            startActivity(goToHome)
+        }
+        else{
+            Toast.makeText(this, "Invalid Credentials!", Toast.LENGTH_LONG).show()
+        }
+
     }
         binding.signupBtn.setOnClickListener{
             val goToHome = Intent(this,RegisterActivity::class.java)

@@ -3,6 +3,7 @@ package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Context
+import android.content.Intent
 import android.util.Patterns
 import android.widget.Toast
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.UserDAOSQLLiteImplementation
@@ -17,7 +18,6 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.regbtn?.setOnClickListener{
-            //if wrong email or
             if(!Patterns.EMAIL_ADDRESS.matcher(binding.emailText.getText().toString()).matches()
                 || binding.passwordText.text.toString().length < 8
                 || binding.fnameText.text.toString().length < 1
@@ -25,19 +25,27 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please input valid details. Password length must be 8 minimum", Toast.LENGTH_LONG).show();
             }
             else{
-                //add code to check if email already exists
                 val userDAO = UserDAOSQLLiteImplementation(this)
-                val newUser = User(binding.emailText.toString())
-                newUser.fname = binding.fnameText.toString()
-                newUser.lname = binding.lnameText.toString()
-                newUser.password = binding.passwordText.toString()
-                userDAO.addUser(newUser)
-                if(userDAO.addUser(newUser) == true){
-                    Toast.makeText(this, "ADDED", Toast.LENGTH_LONG).show()
+                val newUser = User(binding.emailText.text.toString())
+                newUser.fname = binding.fnameText.text.toString()
+                newUser.lname = binding.lnameText.text.toString()
+                newUser.password = binding.passwordText.text.toString()
+                if(userDAO.checkIfUserExists(binding.emailText.text.toString()) == false){
+                    if(userDAO.addUser(newUser) == true){
+                        Toast.makeText(this, "Registered!", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else{
+                        Toast.makeText(this, "Failed to Register", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
                 else{
-                    Toast.makeText(this, "FAILED", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Email Already Exists!", Toast.LENGTH_LONG).show()
                 }
+
             }
 
         }
