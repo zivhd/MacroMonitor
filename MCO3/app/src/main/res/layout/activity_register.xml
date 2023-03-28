@@ -34,7 +34,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fname"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:padding="5dp"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,15 +48,13 @@
             android:layout_height="match_parent"
             android:hint="FIRST NAME"
             android:maxLines="1"
-            android:backgroundTint="#FFFFFF"
-            android:background="@color/black"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/lname"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:padding="5dp"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,13 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="LAST NAME"
-            android:maxLines="1"
-            android:backgroundTint="#FFFFFF"/>
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/email"
     android:layout_width="300dp"
-    android:layout_height="50dp"
+    android:layout_height="70dp"
     android:padding="5dp"
     app:endIconMode="clear_text"
     app:layout_constraintEnd_toEndOf="parent"
@@ -88,13 +85,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="EMAIL"
-        android:maxLines="1"
-        android:backgroundTint="#FFFFFF"/>
+        android:maxLines="1" />
 </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:padding="5dp"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,10 +104,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="PASSWORD"
-            android:maxLines="1"
-            android:backgroundTint="#FFFFFF"/>
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/regbtn"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="Register"

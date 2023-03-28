@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         val goToHome = Intent(this,AlarmActivity::class.java)
         startActivity(goToHome)
     }
+        binding.signupBtn.setOnClickListener{
+            val goToHome = Intent(this,RegisterActivity::class.java)
+            startActivity(goToHome)
+        }
     }
     private fun createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
