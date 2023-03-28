@@ -1,22 +1,13 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
 import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.Point
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
-import android.view.Display
-import android.view.WindowManager
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
@@ -31,15 +22,17 @@ import java.util.*
 class QRCodeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQrcodeBinding
     private lateinit var alarmDAO: AlarmDAO
-    private lateinit var calendar: Calendar
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
+    private lateinit var dataIntent: Intent
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQrcodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
 
 
@@ -53,7 +46,21 @@ class QRCodeActivity : AppCompatActivity() {
         val fat = intent.getStringExtra("fat")!!.toInt()
         val protein = intent.getStringExtra("protein")!!.toInt()
         val time = intent.getStringExtra("time")!!.toInt()
-        val ssid = calories.toString() + meal + carbs.toString() + fat.toString() +protein.toString() + time.toString()
+        val hour = intent.getIntExtra("hour",0)
+        val minute = intent.getIntExtra("minute",0)
+
+        val calendar: Calendar = Calendar.getInstance().apply{
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND,0)
+            set(Calendar.MILLISECOND,0)
+
+        }
+
+
+
+        val ssid = "$calories$meal$carbs$fat$protein$time"
         binding.idIVQrcode.setImageBitmap(getQrCodeBitmap(ssid))
 
 
@@ -67,16 +74,29 @@ class QRCodeActivity : AppCompatActivity() {
         alarmDAO.addAlarm(alarm)
 
             //CURRENTLY THE QR CODE THING DOES NOT SAVE
-            alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
-            pendingIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-                PendingIntent.getBroadcast(this, 0, intent,  FLAG_IMMUTABLE)
-            }
 
-            alarmManager?.set(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + 10 * 1000,
+            alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
+            val dataIntent = Intent(this@QRCodeActivity, AlarmReceiver::class.java)
+            dataIntent.putExtra("meal", meal)
+            dataIntent.putExtra("calories", calories)
+            dataIntent.putExtra("carbs", carbs)
+            dataIntent.putExtra("fat", fat)
+            dataIntent.putExtra("protein", protein)
+            dataIntent.putExtra("time", time)
+            val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, 0, dataIntent, FLAG_IMMUTABLE)
+
+
+
+
+
+
+            alarmManager?.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                1000 * 60 * 24,
                 pendingIntent
             )
+
             val gotoAlarmActivity = Intent(this,AlarmActivity::class.java)
             startActivity(gotoAlarmActivity)
             finish()
@@ -99,17 +119,4 @@ class QRCodeActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-    private fun setAlarm(){
-        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this,AlarmReceiver::class.java)
-        pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
-
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,pendingIntent
-        )
-    }
 }
