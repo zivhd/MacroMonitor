@@ -44,7 +44,7 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
         var minutes = (time % 3600)/60
 
         if(hours > 12)
-            return (hours-12).toString() +":"+ (minutes).toString() + " PM"
-        else return hours.toString()  +":"+minutes.toString() + " AM"
+            return (hours-12).toString() +":"+ (minutes).toString().padStart(2,'0') + " PM"
+        else return hours.toString()  +":"+minutes.toString().padStart(2,'0') + " AM"
     }
 }

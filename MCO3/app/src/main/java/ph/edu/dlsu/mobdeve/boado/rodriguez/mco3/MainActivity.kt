@@ -1,6 +1,10 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityMainBinding
@@ -9,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        createNotificationChannel()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -17,4 +22,18 @@ class MainActivity : AppCompatActivity() {
         startActivity(goToHome)
     }
     }
+    private fun createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "mc03test"
+            val descriptiontext = "test1"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("mco3", name, importance).apply {
+                description = descriptiontext
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }

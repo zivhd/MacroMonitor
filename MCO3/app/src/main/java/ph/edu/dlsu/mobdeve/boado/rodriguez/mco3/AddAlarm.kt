@@ -42,6 +42,8 @@ class AddAlarm : AppCompatActivity() {
                 goToQR.putExtra("fat",binding.fatText.text.toString())
                 goToQR.putExtra("protein",binding.proteinText.text.toString())
                 goToQR.putExtra("time",time.toString())
+                goToQR.putExtra("hour",binding.timePicker1.currentHour)
+                goToQR.putExtra("minute",binding.timePicker1.currentMinute)
                 startActivity(goToQR)
                 finish()
             }else {
