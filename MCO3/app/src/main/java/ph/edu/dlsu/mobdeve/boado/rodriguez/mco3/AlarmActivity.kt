@@ -40,6 +40,14 @@ class AlarmActivity : AppCompatActivity() {
         itemTouchHelper = ItemTouchHelper(swipeCallback)
         itemTouchHelper.attachToRecyclerView(binding.alarmList)
 
+        binding.homeBtn.setOnClickListener(){
+            val goToHome = Intent(this,HomeActivity::class.java)
+            startActivity(goToHome)
+        }
+        binding.meal.setOnClickListener{
+            val goToMeal = Intent(this,MealLogActivity::class.java)
+            startActivity(goToMeal)
+        }
         binding.addAlarmBtn.setOnClickListener(){
             val goToAddAlarm = Intent(this,AddAlarm::class.java)
             startActivity(goToAddAlarm)

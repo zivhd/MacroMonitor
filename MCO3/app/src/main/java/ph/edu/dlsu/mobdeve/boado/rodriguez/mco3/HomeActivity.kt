@@ -17,5 +17,14 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.alarmBtn.setOnClickListener{
+            val goToAlarm = Intent(this,AlarmActivity::class.java)
+            startActivity(goToAlarm)
+        }
+        binding.meal.setOnClickListener{
+            val goToMeal = Intent(this,MealLogActivity::class.java)
+            startActivity(goToMeal)
+        }
     }
 }
