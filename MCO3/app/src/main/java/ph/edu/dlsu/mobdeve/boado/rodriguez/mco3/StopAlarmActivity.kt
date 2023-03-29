@@ -39,7 +39,8 @@ class StopAlarmActivity : AppCompatActivity() {
         alarmList = alarmDAO.getAlarm()
         ssid = intent.getStringExtra("ssid")!!
 
-
+        AudioPlay.pauseAudio()
+        finish()
         val view = binding.root
         setContentView(view)
 

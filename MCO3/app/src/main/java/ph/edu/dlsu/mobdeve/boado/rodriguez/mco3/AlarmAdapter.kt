@@ -1,13 +1,19 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
-import android.text.format.DateUtils.formatElapsedTime
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ItemAlarmBinding
+
 
 class AlarmAdapter(private val context: Context,
 private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
@@ -34,9 +40,14 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
     }
     fun deleteAlarm(position: Int) {
         val alarmDAO = AlarmDAOSQLLiteImplementation(context)
+
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pintent = PendingIntent.getBroadcast(context, alarmList[position].id, intent, FLAG_IMMUTABLE)
+        val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         alarmDAO.removeAlarm(alarmList[position].id)
         alarmList.removeAt(position)
         notifyItemRemoved(position)
+        alarmManager!!.cancel(pintent)
     }
 
     fun convertSecondstoAMPM(time : Int): String{

@@ -25,6 +25,7 @@ class QRCodeActivity : AppCompatActivity() {
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
     private lateinit var dataIntent: Intent
+    private lateinit var intentList: ArrayList<PendingIntent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +75,7 @@ class QRCodeActivity : AppCompatActivity() {
         alarmDAO.addAlarm(alarm)
 
             //CURRENTLY THE QR CODE THING DOES NOT SAVE
-
+            val intentList = ArrayList<PendingIntent>()
             alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
             val dataIntent = Intent(this@QRCodeActivity, AlarmReceiver::class.java)
             dataIntent.putExtra("meal", meal)
@@ -83,8 +84,8 @@ class QRCodeActivity : AppCompatActivity() {
             dataIntent.putExtra("fat", fat)
             dataIntent.putExtra("protein", protein)
             dataIntent.putExtra("time", time)
-            val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, 0, dataIntent, FLAG_IMMUTABLE)
-
+            val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, alarmDAO.getAlarm().last().id, dataIntent, FLAG_IMMUTABLE)
+            intentList.add(pendingIntent)
 
 
 

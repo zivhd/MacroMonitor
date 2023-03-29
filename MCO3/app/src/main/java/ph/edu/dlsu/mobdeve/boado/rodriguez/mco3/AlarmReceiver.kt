@@ -51,6 +51,7 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationManager.notify(0, notification)
 
         AudioPlay.playAudio(context, R.raw.alarm)
+        AudioPlay.continuePlaying(context, R.raw.alarm)
 
 
 
