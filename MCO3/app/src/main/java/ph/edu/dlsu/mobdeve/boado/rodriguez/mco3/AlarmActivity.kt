@@ -1,5 +1,6 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
+import android.content.Context
 import android.content.Intent
 import android.media.Ringtone
 import androidx.appcompat.app.AppCompatActivity
@@ -27,9 +28,13 @@ class AlarmActivity : AppCompatActivity() {
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
+
+        var userID = sharePreference.getInt("ID",0)
+
         alarmDAO = AlarmDAOSQLLiteImplementation(applicationContext)
 
-        alarmAdapter = AlarmAdapter(applicationContext,alarmDAO.getAlarm())
+        alarmAdapter = AlarmAdapter(applicationContext,alarmDAO.getAlarm(userID))
 
         binding.alarmList.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,false)
 

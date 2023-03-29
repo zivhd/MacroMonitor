@@ -15,6 +15,8 @@ interface UserDAO{
     fun checkIfCredentialsMatch(email: String, password: String): Boolean
 
     fun getUserFName(email: String): String
+
+    fun getUserID(email: String):Int
 }
 
 class UserDAOSQLLiteImplementation(var context: Context): UserDAO{
@@ -88,5 +90,18 @@ class UserDAOSQLLiteImplementation(var context: Context): UserDAO{
         }
         fname = cursor.getString(cursor.getColumnIndexOrThrow("user_fname"))
         return fname
+    }
+
+    override fun getUserID(email: String): Int{
+        val databaseHandler:DatabaseHandler = DatabaseHandler(context)
+        val db = databaseHandler.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM ${DatabaseHandler.tableUser} where ${DatabaseHandler.tableUserEmail} = "+'"'+email+'"', null);
+        var userID = 0
+        if (cursor != null){
+            cursor.moveToFirst()
+        }
+        userID = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
+        return userID
     }
 }

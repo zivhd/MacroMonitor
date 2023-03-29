@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StopAlarmActivity">
+    tools:context=".StopAlarmActivity"
+    android:background="#E9F8F9">
 
     <SurfaceView
         android:id="@+id/cameraSurfaceView"

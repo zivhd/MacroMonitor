@@ -20,11 +20,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val userDAO = UserDAOSQLLiteImplementation(this)
         binding.loginBtn.setOnClickListener{
-        if(userDAO.checkIfCredentialsMatch(binding.usernameText.text.toString(), binding.passwordText.text.toString()) == true){
+        if(userDAO.checkIfCredentialsMatch(binding.usernameText.text.toString(), binding.passwordText.text.toString())){
             val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
             val editor = sharePreference.edit()
             editor.putString("EMAIL", binding.usernameText.text.toString())
             editor.putString("PASSWORD", binding.passwordText.text.toString())
+            editor.putInt("ID",userDAO.getUserID(binding.usernameText.text.toString()))
             editor.apply()
             Toast.makeText(this, "Successfully Logged In!", Toast.LENGTH_LONG).show()
             val goToHome = Intent(this,HomeActivity::class.java)

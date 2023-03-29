@@ -1,6 +1,7 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,7 +37,9 @@ class StopAlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStopAlarmBinding.inflate(layoutInflater)
         alarmDAO = AlarmDAOSQLLiteImplementation(applicationContext)
-        alarmList = alarmDAO.getAlarm()
+        val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
+        var userID = sharePreference.getInt("ID",0)
+        alarmList = alarmDAO.getAlarm(userID)
         ssid = intent.getStringExtra("ssid")!!
 
         AudioPlay.pauseAudio()

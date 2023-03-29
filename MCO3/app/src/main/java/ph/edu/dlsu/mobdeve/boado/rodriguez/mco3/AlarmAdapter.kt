@@ -40,7 +40,6 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
     }
     fun deleteAlarm(position: Int) {
         val alarmDAO = AlarmDAOSQLLiteImplementation(context)
-
         val intent = Intent(context, AlarmReceiver::class.java)
         val pintent = PendingIntent.getBroadcast(context, alarmList[position].id, intent, FLAG_IMMUTABLE)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager

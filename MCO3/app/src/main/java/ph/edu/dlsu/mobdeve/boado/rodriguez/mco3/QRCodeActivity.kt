@@ -3,6 +3,7 @@ package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -36,7 +37,8 @@ class QRCodeActivity : AppCompatActivity() {
 
 
 
-
+        val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
+        var userID = sharePreference.getInt("ID",0)
         alarmDAO = AlarmDAOSQLLiteImplementation(applicationContext)
         val context = this
         val db = DatabaseHandlerAlarm(context)
@@ -72,7 +74,7 @@ class QRCodeActivity : AppCompatActivity() {
         alarm.fat = fat
         alarm.protein = protein
         alarm.time = time
-        alarmDAO.addAlarm(alarm)
+        alarmDAO.addAlarm(alarm,userID)
 
             //CURRENTLY THE QR CODE THING DOES NOT SAVE
             val intentList = ArrayList<PendingIntent>()
@@ -84,7 +86,7 @@ class QRCodeActivity : AppCompatActivity() {
             dataIntent.putExtra("fat", fat)
             dataIntent.putExtra("protein", protein)
             dataIntent.putExtra("time", time)
-            val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, alarmDAO.getAlarm().last().id, dataIntent, FLAG_IMMUTABLE)
+            val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, alarmDAO.getAlarm(userID).last().id, dataIntent, FLAG_IMMUTABLE)
             intentList.add(pendingIntent)
 
 

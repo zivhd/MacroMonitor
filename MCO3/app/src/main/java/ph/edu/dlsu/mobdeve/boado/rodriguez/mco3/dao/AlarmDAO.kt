@@ -10,14 +10,14 @@ import kotlinx.coroutines.selects.select
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 
 interface AlarmDAO{
-    fun addAlarm(alarm: alarm)
+    fun addAlarm(alarm: alarm, userID: Int)
     fun removeAlarm(alarmID: Int)
-    fun getAlarm() : ArrayList<alarm>
+    fun getAlarm(userID: Int) : ArrayList<alarm>
     fun updateAlarm(alarm : alarm)
 }
 
 class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
-    override fun addAlarm(alarm: alarm) {
+    override fun addAlarm(alarm: alarm, userID: Int) {
         val databaseHandlerAlarm:DatabaseHandlerAlarm = DatabaseHandlerAlarm(context)
         val db = databaseHandlerAlarm.readableDatabase
         val contentValues = ContentValues()
@@ -27,6 +27,7 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
         contentValues.put(DatabaseHandlerAlarm.tableAlarmCarbs, alarm.carbs)
         contentValues.put(DatabaseHandlerAlarm.tableAlarmProtein, alarm.protein)
         contentValues.put(DatabaseHandlerAlarm.tableAlarmTime, alarm.time)
+        contentValues.put(DatabaseHandlerAlarm.tableAlarmUserID, userID)
         val result = db.insert(DatabaseHandlerAlarm.tableAlarm, null, contentValues)
         if (result == (0).toLong()) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
@@ -52,13 +53,13 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
     }
 
     @SuppressLint("Range")
-    override fun getAlarm(): ArrayList<alarm> {
+    override fun getAlarm(userID: Int): ArrayList<alarm> {
         val alarmList: ArrayList<alarm> = ArrayList()
         val selectQuery = "Select ${DatabaseHandlerAlarm.tableAlarmID}, ${DatabaseHandlerAlarm.tableAlarmCalories}," +
                 "${DatabaseHandlerAlarm.tableAlarmMeal}, " +
                 "${DatabaseHandlerAlarm.tableAlarmUserID}, " +
                 "${DatabaseHandlerAlarm.tableAlarmTime} " +
-                "FROM ${DatabaseHandlerAlarm.tableAlarm}"
+                "FROM ${DatabaseHandlerAlarm.tableAlarm} WHERE ${DatabaseHandlerAlarm.tableAlarmUserID} = $userID  "
 
         val databaseHandlerAlarm:DatabaseHandlerAlarm = DatabaseHandlerAlarm(context)
         val db = databaseHandlerAlarm.readableDatabase
