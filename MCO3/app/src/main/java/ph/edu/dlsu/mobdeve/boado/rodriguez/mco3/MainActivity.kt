@@ -13,16 +13,21 @@ import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
+    var email = ""
+    var pwd = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createNotificationChannel()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val userDAO = UserDAOSQLLiteImplementation(this)
+        val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
+        val editor = sharePreference.edit()
+        email = sharePreference.getString("EMAIL", "").toString()
+        pwd = sharePreference.getString("PASSWORD", "").toString()
         binding.loginBtn.setOnClickListener{
         if(userDAO.checkIfCredentialsMatch(binding.usernameText.text.toString(), binding.passwordText.text.toString())){
-            val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
-            val editor = sharePreference.edit()
+
             editor.putString("EMAIL", binding.usernameText.text.toString())
             editor.putString("PASSWORD", binding.passwordText.text.toString())
             editor.putInt("ID",userDAO.getUserID(binding.usernameText.text.toString()))
@@ -37,8 +42,16 @@ class MainActivity : AppCompatActivity() {
 
     }
         binding.signupBtn.setOnClickListener{
-            val goToHome = Intent(this,RegisterActivity::class.java)
-            startActivity(goToHome)
+            val goToReg = Intent(this,RegisterActivity::class.java)
+            startActivity(goToReg)
+        }
+    }
+    override fun onStart(){
+        super.onStart()
+        if(!email.equals("") && !pwd.equals("")){
+            val i = Intent(this, HomeActivity::class.java)
+            startActivity(i)
+            finish()
         }
     }
     private fun createNotificationChannel(){

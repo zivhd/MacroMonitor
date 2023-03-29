@@ -22,6 +22,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
+        val editor = sharePreference.edit()
         var email = sharePreference.getString("EMAIL", "").toString()
         val userDAO = UserDAOSQLLiteImplementation(this)
         var fname = userDAO.getUserFName(email)
@@ -72,6 +73,9 @@ class HomeActivity : AppCompatActivity() {
 
 
         binding.logout.setOnClickListener{
+            editor.putString("EMAIL", "")
+            editor.putString("PASSWORD", "")
+            editor.apply()
             val intent = Intent(this, MainActivity::class.java)
 
             //cancels all user alarms
