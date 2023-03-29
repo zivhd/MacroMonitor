@@ -13,6 +13,8 @@ interface UserDAO{
     fun getUsers(): ArrayList<User>
     fun checkIfUserExists(email: String): Boolean
     fun checkIfCredentialsMatch(email: String, password: String): Boolean
+
+    fun getUserFName(email: String): String
 }
 
 class UserDAOSQLLiteImplementation(var context: Context): UserDAO{
@@ -73,5 +75,18 @@ class UserDAOSQLLiteImplementation(var context: Context): UserDAO{
             return false
         }
         return true
+    }
+
+    override fun getUserFName(email: String): String {
+        val databaseHandler:DatabaseHandler = DatabaseHandler(context)
+        val db = databaseHandler.readableDatabase
+        var cursor: Cursor? = null
+        cursor = db.rawQuery("SELECT * FROM ${DatabaseHandler.tableUser} where ${DatabaseHandler.tableUserEmail} = "+'"'+email+'"', null);
+        var fname = ""
+        if (cursor != null){
+            cursor.moveToFirst()
+        }
+        fname = cursor.getString(cursor.getColumnIndexOrThrow("user_fname"))
+        return fname
     }
 }

@@ -1,10 +1,14 @@
 package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.UserDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityHomeBinding
-import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityRegisterBinding
+
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -12,6 +16,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
+        var email = sharePreference.getString("EMAIL", "").toString()
+        val userDAO = UserDAOSQLLiteImplementation(this)
+        var fname = userDAO.getUserFName(email)
+
+        binding.title.text = "WELCOME BACK, $fname"
 
         binding.logout.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
