@@ -167,8 +167,8 @@
         android:layout_height="70dp"
         android:layout_gravity="center"
         android:background="#537FE7"
-        android:gravity="center"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -178,28 +178,27 @@
             android:id="@+id/alarmtab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#537FE7"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_gravity="center"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/alarm_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/alarm"
-                android:tint="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@android:color/white"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/alarmtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:text="ALARM"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
@@ -214,28 +213,29 @@
             android:id="@+id/hometab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="57dp"
-            android:background="#537FE7"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5">
+            android:background="#537FE7"
+            android:layout_marginLeft="57dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:layout_constraintHorizontal_bias="0.5"
 
+            app:layout_constraintBottom_toBottomOf="parent">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/home_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/home"
-                android:tint="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@android:color/white"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/hometitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:text="HOME"
+
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -248,24 +248,24 @@
             android:id="@+id/mealtab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="57dp"
-            android:background="#537FE7"
             android:orientation="vertical"
+            android:gravity="center"
+            android:background="#537FE7"
+            android:layout_marginLeft="57dp"
 
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
 
-            app:layout_constraintHorizontal_bias="0.5">
-
+            app:layout_constraintBottom_toBottomOf="parent">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/meal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+
                 android:src="@drawable/meal"
-                android:tint="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@android:color/white"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mealtitle"
                 android:layout_width="wrap_content"
@@ -279,7 +279,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

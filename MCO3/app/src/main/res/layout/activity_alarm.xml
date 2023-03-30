@@ -55,7 +55,6 @@
         app:layout_constraintVertical_bias="0.0"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_gravity="center"
@@ -66,17 +65,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/alarmtab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#537FE7"
-
+            android:layout_gravity="center"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/alarm_btn"
                 android:layout_width="50dp"
@@ -91,7 +92,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ALARM"
-                android:layout_marginLeft="5dp"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,9 +108,11 @@
             android:orientation="vertical"
             android:background="#537FE7"
             android:layout_marginLeft="57dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBottom_toBottomOf="parent">
 
+            app:layout_constraintBottom_toBottomOf="parent">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/home_btn"
                 android:layout_width="50dp"
@@ -125,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOME"
-                android:layout_marginLeft="5dp"
+
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,6 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
             android:background="#537FE7"
             android:layout_marginLeft="57dp"
 
@@ -149,6 +152,7 @@
                 android:id="@+id/meal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+
                 android:src="@drawable/meal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

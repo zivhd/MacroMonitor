@@ -68,41 +68,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/alarmtab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#537FE7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/alarm_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/alarm"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:tint="@android:color/white"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/alarmtitle"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/alarmtab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ALARM"
-            android:layout_marginLeft="5dp"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            app:layout_constraintBottom_toBottomOf="parent">
 
-<!--        HOME-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/alarm_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/alarm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@android:color/white"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/alarmtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALARM"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--        HOME-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/hometab"
             android:layout_width="wrap_content"
@@ -110,7 +111,8 @@
             android:orientation="vertical"
             android:background="#537FE7"
             android:layout_marginLeft="57dp"
-
+            android:layout_gravity="center"
+            android:gravity="center"
             app:layout_constraintHorizontal_bias="0.5"
 
             app:layout_constraintBottom_toBottomOf="parent">
@@ -128,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOME"
-                android:layout_marginLeft="5dp"
+
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,12 +138,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-<!--        MEAL-->
+        <!--        MEAL-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/mealtab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
             android:background="#537FE7"
             android:layout_marginLeft="57dp"
 
@@ -152,6 +155,7 @@
                 android:id="@+id/meal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+
                 android:src="@drawable/meal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
