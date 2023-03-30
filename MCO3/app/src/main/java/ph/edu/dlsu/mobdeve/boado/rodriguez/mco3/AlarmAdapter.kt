@@ -52,6 +52,12 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
                 this.itemView.context.startActivity(intent)
 
             }
+            itemBinding.card.setOnClickListener(){
+                val intent = Intent(context, EditAlarm::class.java)
+                val id = alarm.id
+                intent.putExtra("ID",id)
+                this.itemView.context.startActivity(intent)
+            }
         }
     }
     fun deleteAlarm(position: Int) {

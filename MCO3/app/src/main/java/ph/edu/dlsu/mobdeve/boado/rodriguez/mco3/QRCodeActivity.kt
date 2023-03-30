@@ -28,6 +28,7 @@ class QRCodeActivity : AppCompatActivity() {
     private lateinit var pendingIntent: PendingIntent
     private lateinit var dataIntent: Intent
     private lateinit var intentList: ArrayList<PendingIntent>
+    private var alarmAdapter: AlarmAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +66,9 @@ class QRCodeActivity : AppCompatActivity() {
         Log.d("minute", minute.toString())
         Log.d("timeinmillis", calendar.timeInMillis.toString())
 
+        val id = intent.getIntExtra("id",0)
 
+        alarmAdapter = AlarmAdapter(applicationContext,alarmDAO.getAlarm(userID))
         val ssid = "$calories$meal$carbs$fat$protein$time"
         binding.idIVQrcode.setImageBitmap(getQrCodeBitmap(ssid))
 
@@ -77,7 +80,10 @@ class QRCodeActivity : AppCompatActivity() {
         alarm.fat = fat
         alarm.protein = protein
         alarm.time = time
+            if(id != 0)
+                alarmAdapter!!.deleteAlarm(id)
         alarmDAO.addAlarm(alarm,userID)
+
 
             //CURRENTLY THE QR CODE THING DOES NOT SAVE
             val intentList = ArrayList<PendingIntent>()

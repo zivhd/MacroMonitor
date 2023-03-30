@@ -50,7 +50,7 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
     }
 
     override fun updateAlarm(alarm: alarm) {
-        TODO("Not yet implemented")
+
     }
 
     @SuppressLint("Range")

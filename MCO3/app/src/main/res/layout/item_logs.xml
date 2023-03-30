@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:elevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -87,9 +88,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/meal_time"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="15dp"
             android:text="00:00 PM"
             android:textColor="#181823"
             android:textSize="25dp"
@@ -100,9 +101,10 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/meal_date"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="25dp"
             android:text="DATE"
             android:textColor="#181823"
             android:textSize="15dp"
