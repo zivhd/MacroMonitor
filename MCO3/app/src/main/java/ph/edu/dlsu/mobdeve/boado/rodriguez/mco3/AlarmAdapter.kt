@@ -45,7 +45,7 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
             itemBinding.alarmProtein.text = protein.toString() + "g protein"
             itemBinding.alarmTime.text = convertSecondstoAMPM(alarm.time)
 
-            itemBinding.QRBtn.setOnClickListener(){
+            itemBinding.alarmDetails.setOnClickListener(){
                 val intent = Intent(context, ShowQR::class.java)
                 val ssid = "$calories$meal$carbs$fat$protein$time"
                 intent.putExtra("ssid",ssid)

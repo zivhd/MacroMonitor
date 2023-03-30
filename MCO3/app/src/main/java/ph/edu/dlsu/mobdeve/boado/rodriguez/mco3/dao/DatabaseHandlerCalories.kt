@@ -25,6 +25,12 @@ class DatabaseHandlerCalories(context: Context): SQLiteOpenHelper(context, DBNAM
         const val tableCaloriesUserID = "calories_userid"
         const val tableCaloriesTotal = "calories_total"
         const val tableCaloriesDate= "calories_date"
+        const val tableCaloriesTime= "calories_time"
+        const val tableCaloriesMeal = "calories_name"
+        const val tableCaloriesCarbs = "calories_carbs"
+        const val tableCaloriesFat = "carbs_fat"
+        const val tableCaloriesProtein = "carbs_protein"
+
     }
 
     override fun onCreate(db: SQLiteDatabase?){
@@ -35,7 +41,12 @@ class DatabaseHandlerCalories(context: Context): SQLiteOpenHelper(context, DBNAM
                 "($tableCaloriesID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$tableCaloriesUserID INTEGER, " +
                 "$tableCaloriesTotal INTEGER, " +
-                "$tableCaloriesDate DATE)"
+                "$tableCaloriesDate STRING," +
+                "$tableCaloriesMeal STRING," +
+                "$tableCaloriesCarbs STRING," +
+                "$tableCaloriesFat STRING," +
+                "$tableCaloriesProtein STRING," +
+                "$tableCaloriesTime INTEGER)"
 
         db?.execSQL(createAccountsTable)
 

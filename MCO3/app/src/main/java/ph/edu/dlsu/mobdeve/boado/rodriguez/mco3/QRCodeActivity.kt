@@ -59,9 +59,11 @@ class QRCodeActivity : AppCompatActivity() {
             set(Calendar.MINUTE, minute)
             set(Calendar.SECOND,0)
             set(Calendar.MILLISECOND,0)
-
         }
 
+        Log.d("HOUR", hour.toString())
+        Log.d("minute", minute.toString())
+        Log.d("timeinmillis", calendar.timeInMillis.toString())
 
 
         val ssid = "$calories$meal$carbs$fat$protein$time"

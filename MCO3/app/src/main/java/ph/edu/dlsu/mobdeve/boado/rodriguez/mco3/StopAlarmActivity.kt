@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.SurfaceHolder
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.IOException
@@ -21,8 +23,15 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.google.android.gms.vision.Detector.Detections
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAO
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.CaloriesDAO
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.CaloriesDAOSQLLiteImplementation
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.Calories
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityStopAlarmBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StopAlarmActivity : AppCompatActivity() {
     private val requestCodeCameraPermission = 1001
@@ -40,16 +49,21 @@ class StopAlarmActivity : AppCompatActivity() {
     private var protein = 0
     private var time = 0
     private var alarmID = 0
+    private var userID =0
+    private var caloriesAdapter: CaloriesAdapter? = null
+    private lateinit var caloriesDAO: CaloriesDAO
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStopAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
         alarmDAO = AlarmDAOSQLLiteImplementation(applicationContext)
         val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
-        var userID = sharePreference.getInt("ID",0)
+         userID = sharePreference.getInt("ID",0)
         alarmList = alarmDAO.getAlarm(userID)
-
+        caloriesDAO = CaloriesDAOSQLLiteImplementation(applicationContext)
+        caloriesAdapter = CaloriesAdapter(applicationContext,caloriesDAO.getCalories(userID))
 
         alarmID = intent.getIntExtra("id",0)
         calories = intent.getIntExtra("calories",0)
@@ -196,16 +210,28 @@ class StopAlarmActivity : AppCompatActivity() {
         cameraSource.stop()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun stopAlarm(ID: Int, meal : String, carbs : Int, fat: Int, protein: Int, time: Int, calories: Int){
         AudioPlay.stopAudio( )
         val intent = Intent(this, MealLogActivity::class.java)
-        intent.putExtra("id",ID)
-        intent.putExtra("meal",meal)
-        intent.putExtra("carbs",carbs)
-        intent.putExtra("fat",fat)
-        intent.putExtra("protein",protein)
-        intent.putExtra("time",time)
-        intent.putExtra("calories",calories)
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val date = Date()
+        val current = formatter.format(date)
+        val cal =  Calories(0)
+        Log.d("CUIRRENT DATE", cal.date)
+        cal.totalCalories = calories
+        cal.totalProtein =protein
+        cal.totalFat = fat
+        cal.totalCarbs = carbs
+        cal.date = current
+        cal.time = time
+        cal.meal = meal
+        cal.userID = userID
+        Log.d("CUIRRENT DATE", cal.date)
+        caloriesDAO.addCalories(cal,userID)
+
+
+
         startActivity(intent)
         finish()
         AudioPlay.stopAudio()

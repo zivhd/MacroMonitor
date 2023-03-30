@@ -9,5 +9,7 @@ class Calories(var id: Int) {
     var totalProtein: Int = 0
     var totalCarbs: Int = 0
     var totalFat: Int = 0
-    var date: Date = Date(2001,10, 10)
+    var date: String = " "
+    var time : Int = 0
+    var meal : String = " "
 }
