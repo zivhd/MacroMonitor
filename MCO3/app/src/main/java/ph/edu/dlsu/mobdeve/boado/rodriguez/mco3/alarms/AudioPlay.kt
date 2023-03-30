@@ -1,4 +1,4 @@
-package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
+package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms
 
 
 
@@ -46,6 +46,10 @@ object AudioPlay {
 
     fun pauseAudio() {
         mediaPlayer?.pause()
+    }
+
+    fun stopAudio(){
+        mediaPlayer?.stop()
     }
 
 }

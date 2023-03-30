@@ -1,20 +1,13 @@
-package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
+package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.media.MediaPlayer
-import android.os.Build
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.startActivity
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.R
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.StopAlarmActivity
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -30,6 +23,13 @@ class AlarmReceiver : BroadcastReceiver() {
         val intent = Intent(context, StopAlarmActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.putExtra("ssid",ssid)
+        intent.putExtra("meal",meal)
+        intent.putExtra("carbs",carbs)
+        intent.putExtra("fat",fat)
+        intent.putExtra("protein",protein)
+        intent.putExtra("time",time)
+        intent.putExtra("calories",calories)
+
 
 
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)

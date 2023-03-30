@@ -1,4 +1,4 @@
-package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
+package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -8,8 +8,8 @@ import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.ShowQR
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ItemAlarmBinding
@@ -18,7 +18,7 @@ import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ItemAlarmBinding
 class AlarmAdapter(private val context: Context,
 private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding = ItemAlarmBinding. inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
@@ -27,7 +27,7 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
         return alarmList.size
     }
 
-    override fun onBindViewHolder(holder: AlarmAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(alarmList[position])
     }
 
@@ -36,6 +36,20 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
             itemBinding.alarmName.text = alarm.meal
             itemBinding.alarmCalories.text = alarm.calories.toString()  + " Calories"
             itemBinding.alarmTime.text = convertSecondstoAMPM(alarm.time)
+
+            itemBinding.QRBtn.setOnClickListener(){
+                val intent = Intent(context, ShowQR::class.java)
+                val calories = alarm.calories
+                val meal = alarm.meal
+                val carbs = alarm.carbs
+                val fat = alarm.fat
+                val protein = alarm.protein
+                val time = alarm.time
+                val ssid = "$calories$meal$carbs$fat$protein$time"
+                intent.putExtra("ssid",ssid)
+                this.itemView.context.startActivity(intent)
+
+            }
         }
     }
     fun deleteAlarm(position: Int) {

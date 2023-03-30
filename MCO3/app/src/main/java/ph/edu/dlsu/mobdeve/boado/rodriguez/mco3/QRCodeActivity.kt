@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms.AlarmReceiver
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAO
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.DatabaseHandlerAlarm

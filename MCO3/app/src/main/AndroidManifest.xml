@@ -58,7 +58,7 @@
         </activity>
 
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".alarms.AlarmReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.permission.POST_NOTIFICATIONS" />

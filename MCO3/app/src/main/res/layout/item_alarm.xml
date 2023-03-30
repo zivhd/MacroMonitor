@@ -18,9 +18,10 @@
         android:orientation="vertical">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/alarm_name"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Name"
+        android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="12dp"
         android:textStyle="bold"
@@ -30,11 +31,12 @@
         app:layout_constraintVertical_bias="0.5" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/alarm_calories"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Calories"
             android:textColor="@color/white"
             android:textSize="12dp"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,6 +53,20 @@
         android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/alarm_details"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/QR_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/alarm_time"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 

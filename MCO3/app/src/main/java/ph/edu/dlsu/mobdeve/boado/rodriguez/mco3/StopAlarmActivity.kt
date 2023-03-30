@@ -2,6 +2,7 @@ package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,7 +18,7 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.google.android.gms.vision.Detector.Detections
-import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.R
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms.AudioPlay
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAO
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
@@ -32,6 +33,13 @@ class StopAlarmActivity : AppCompatActivity() {
     private lateinit var alarmDAO: AlarmDAO
     private lateinit var alarmList: ArrayList<alarm>
     private lateinit var ssid: String
+    private var calories = 0
+    private var meal = " "
+    private var carbs = 0
+    private var fat = 0
+    private var protein = 0
+    private var time = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +50,19 @@ class StopAlarmActivity : AppCompatActivity() {
         alarmList = alarmDAO.getAlarm(userID)
         ssid = intent.getStringExtra("ssid")!!
 
-        AudioPlay.pauseAudio()
-        finish()
+         calories = intent!!.getIntExtra("calories",0)
+         meal = intent!!.getStringExtra("meal")!!
+         carbs = intent!!.getIntExtra("carbs",0)
+         fat = intent!!.getIntExtra("fat",0)
+         protein = intent!!.getIntExtra("protein",0)
+         time = intent!!.getIntExtra("time",0)
+
         val view = binding.root
         setContentView(view)
+
+        binding.debugStopAlarm.setOnClickListener(){
+            stopAlarm(meal!!,carbs,fat,protein,time,calories)
+        }
 
 
         if (ContextCompat.checkSelfPermission(
@@ -123,8 +140,7 @@ class StopAlarmActivity : AppCompatActivity() {
                         if(scannedValue == ssid){
                             cameraSource.stop()
                             Toast.makeText(this@StopAlarmActivity, "value- $scannedValue", Toast.LENGTH_LONG).show()
-                            AudioPlay.pauseAudio()
-                            finish()
+                            stopAlarm(meal!!,carbs,fat,protein,time,calories)
 
 
                         }
@@ -151,7 +167,7 @@ class StopAlarmActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == requestCodeCameraPermission && grantResults.isNotEmpty()) {
@@ -166,5 +182,20 @@ class StopAlarmActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraSource.stop()
+    }
+
+    private fun stopAlarm(meal : String, carbs : Int, fat: Int, protein: Int, time: Int, calories: Int){
+        AudioPlay.stopAudio( )
+        val intent = Intent(this, MealLogActivity::class.java)
+        intent.putExtra("meal",meal)
+        intent.putExtra("carbs",carbs)
+        intent.putExtra("fat",fat)
+        intent.putExtra("protein",protein)
+        intent.putExtra("time",time)
+        intent.putExtra("calories",calories)
+        startActivity(intent)
+        finish()
+        AudioPlay.stopAudio()
+        finish()
     }
 }
