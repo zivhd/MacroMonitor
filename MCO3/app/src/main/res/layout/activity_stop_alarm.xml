@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StopAlarmActivity"
-    android:background="#E9F8F9">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/idTVHeading"

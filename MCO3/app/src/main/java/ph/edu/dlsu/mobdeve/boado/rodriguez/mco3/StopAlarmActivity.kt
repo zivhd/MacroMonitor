@@ -85,7 +85,7 @@ class StopAlarmActivity : AppCompatActivity() {
         Toast.makeText(this@StopAlarmActivity, calories.toString(), Toast.LENGTH_LONG).show()
 
 
-
+        binding.idTVHeading.text = "SCAN QR CODE FOR MEAL : " + meal
         binding.debugStopAlarm.setOnClickListener(){
             stopAlarm(alarmID,meal!!,carbs,fat,protein,time,calories)
         }
@@ -152,6 +152,7 @@ class StopAlarmActivity : AppCompatActivity() {
                     .show()
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun receiveDetections(detections: Detections<Barcode>) {
                 val barcodes = detections.detectedItems
                 if (barcodes.size() == 1) {

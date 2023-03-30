@@ -31,36 +31,36 @@ class HomeActivity : AppCompatActivity() {
         var size = alarmList.size
         val dataIntent = Intent(this, AlarmReceiver::class.java)
 
-        //restarts all user's alarms
-        for(i in 0 until size) {
-            val calendar: Calendar = Calendar.getInstance().apply{
-                timeInMillis = System.currentTimeMillis()
-                set(Calendar.HOUR_OF_DAY, alarmList[i].time/3600)
-                set(Calendar.MINUTE, alarmList[i].time/60)
-                set(Calendar.SECOND,0)
-                set(Calendar.MILLISECOND,0)
-
-            }
-            val intentList = ArrayList<PendingIntent>()
-            val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
-            val dataIntent = Intent(this, AlarmReceiver::class.java)
-            dataIntent.putExtra("meal", alarmList[i].meal)
-            dataIntent.putExtra("calories", alarmList[i].calories)
-            dataIntent.putExtra("carbs", alarmList[i].carbs)
-            dataIntent.putExtra("fat", alarmList[i].fat)
-            dataIntent.putExtra("protein", alarmList[i].protein)
-            dataIntent.putExtra("time", alarmList[i].time)
-            val pendingIntent = PendingIntent.getBroadcast(this, alarmDAO.getAlarm(userID)[i].id, dataIntent,
-                PendingIntent.FLAG_IMMUTABLE
-            )
-            intentList.add(pendingIntent)
-            alarmManager?.setRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                1000 * 60 * 24,
-                pendingIntent
-            )
-        }
+//        restarts all user's alarms
+//        for(i in 0 until size) {
+//            val calendar: Calendar = Calendar.getInstance().apply{
+//                timeInMillis = System.currentTimeMillis()
+//                set(Calendar.HOUR_OF_DAY, alarmList[i].time/3600)
+//                set(Calendar.MINUTE, alarmList[i].time/60)
+//                set(Calendar.SECOND,0)
+//                set(Calendar.MILLISECOND,0)
+//
+//            }
+//            val intentList = ArrayList<PendingIntent>()
+//            val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
+//            val dataIntent = Intent(this, AlarmReceiver::class.java)
+//            dataIntent.putExtra("meal", alarmList[i].meal)
+//            dataIntent.putExtra("calories", alarmList[i].calories)
+//            dataIntent.putExtra("carbs", alarmList[i].carbs)
+//            dataIntent.putExtra("fat", alarmList[i].fat)
+//            dataIntent.putExtra("protein", alarmList[i].protein)
+//            dataIntent.putExtra("time", alarmList[i].time)
+//            val pendingIntent = PendingIntent.getBroadcast(this, alarmDAO.getAlarm(userID)[i].id, dataIntent,
+//                PendingIntent.FLAG_IMMUTABLE
+//            )
+//            intentList.add(pendingIntent)
+//            alarmManager?.setRepeating(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                1000 * 60 * 24,
+//                pendingIntent
+//            )
+//        }
 
 
 

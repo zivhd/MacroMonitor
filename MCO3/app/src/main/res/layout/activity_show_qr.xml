@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="#E9F8F9">
+    android:background="@color/white">
 
     <!--on below line we are creating
         a text for heading of our app-->

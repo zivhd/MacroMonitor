@@ -42,14 +42,14 @@ class SwipeCallback (dragDirs: Int, swipeDirs: Int) :
         val itemView = viewHolder.itemView
 
         if (dX > 0) { // Swiping to the right
-            background = ColorDrawable(Color.LTGRAY)
+            background = ColorDrawable(Color.TRANSPARENT)
             background.setBounds(
                 itemView.left, itemView.top,
                 itemView.left + dX.toInt(),
                 itemView.bottom
             )
         } else if (dX < 0) { // Swiping to the left
-            background = ColorDrawable(Color.DKGRAY)
+            background = ColorDrawable(Color.TRANSPARENT)
             background.setBounds(
                 itemView.right + dX.toInt(),
                 itemView.top, itemView.right, itemView.bottom
