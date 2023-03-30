@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.SurfaceHolder
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -18,7 +19,6 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.google.android.gms.vision.Detector.Detections
-import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms.AudioPlay
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAO
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
@@ -34,34 +34,46 @@ class StopAlarmActivity : AppCompatActivity() {
     private lateinit var alarmList: ArrayList<alarm>
     private lateinit var ssid: String
     private var calories = 0
-    private var meal = " "
+    private lateinit var meal: String
     private var carbs = 0
     private var fat = 0
     private var protein = 0
     private var time = 0
-
+    private var alarmID = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStopAlarmBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         alarmDAO = AlarmDAOSQLLiteImplementation(applicationContext)
         val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
         var userID = sharePreference.getInt("ID",0)
         alarmList = alarmDAO.getAlarm(userID)
+
+
+        alarmID = intent.getIntExtra("id",0)
+        calories = intent.getIntExtra("calories",0)
+        carbs = intent.getIntExtra("carbs",0)
+        fat = intent.getIntExtra("fat",0)
+        protein = intent.getIntExtra("protein",0)
+        time = intent.getIntExtra("time",0)
         ssid = intent.getStringExtra("ssid")!!
+        meal = intent.getStringExtra("meal")!!
 
-         calories = intent!!.getIntExtra("calories",0)
-         meal = intent!!.getStringExtra("meal")!!
-         carbs = intent!!.getIntExtra("carbs",0)
-         fat = intent!!.getIntExtra("fat",0)
-         protein = intent!!.getIntExtra("protein",0)
-         time = intent!!.getIntExtra("time",0)
+        Log.d("alarmID", alarmID.toString())
+        Log.d("calories", calories.toString())
+        Log.d("carbs", carbs.toString())
+        Log.d("fat", fat.toString())
+        Log.d("protein", protein.toString())
+        Log.d("ssid", ssid.toString())
+        Log.d("meal", meal.toString())
 
-        val view = binding.root
-        setContentView(view)
+        Toast.makeText(this@StopAlarmActivity, calories.toString(), Toast.LENGTH_LONG).show()
+
+
 
         binding.debugStopAlarm.setOnClickListener(){
-            stopAlarm(meal!!,carbs,fat,protein,time,calories)
+            stopAlarm(alarmID,meal!!,carbs,fat,protein,time,calories)
         }
 
 
@@ -140,7 +152,7 @@ class StopAlarmActivity : AppCompatActivity() {
                         if(scannedValue == ssid){
                             cameraSource.stop()
                             Toast.makeText(this@StopAlarmActivity, "value- $scannedValue", Toast.LENGTH_LONG).show()
-                            stopAlarm(meal!!,carbs,fat,protein,time,calories)
+                            stopAlarm(alarmID,meal!!,carbs,fat,protein,time,calories)
 
 
                         }
@@ -184,9 +196,10 @@ class StopAlarmActivity : AppCompatActivity() {
         cameraSource.stop()
     }
 
-    private fun stopAlarm(meal : String, carbs : Int, fat: Int, protein: Int, time: Int, calories: Int){
+    private fun stopAlarm(ID: Int, meal : String, carbs : Int, fat: Int, protein: Int, time: Int, calories: Int){
         AudioPlay.stopAudio( )
         val intent = Intent(this, MealLogActivity::class.java)
+        intent.putExtra("id",ID)
         intent.putExtra("meal",meal)
         intent.putExtra("carbs",carbs)
         intent.putExtra("fat",fat)

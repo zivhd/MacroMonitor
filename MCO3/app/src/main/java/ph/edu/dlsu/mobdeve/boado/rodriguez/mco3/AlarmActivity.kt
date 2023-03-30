@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms.AlarmAdapter
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAO
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityAlarmBinding

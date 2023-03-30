@@ -8,11 +8,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
-import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms.AlarmReceiver
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAO
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.DatabaseHandlerAlarm
@@ -87,13 +87,9 @@ class QRCodeActivity : AppCompatActivity() {
             dataIntent.putExtra("fat", fat)
             dataIntent.putExtra("protein", protein)
             dataIntent.putExtra("time", time)
+            dataIntent.putExtra("id",alarmDAO.getAlarm(userID).last().id)
             val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, alarmDAO.getAlarm(userID).last().id, dataIntent, FLAG_IMMUTABLE)
             intentList.add(pendingIntent)
-
-
-
-
-
             alarmManager?.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,

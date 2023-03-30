@@ -49,9 +49,6 @@ class DatabaseHandlerAlarm(context: Context): SQLiteOpenHelper(context, DBNAME, 
         db?.execSQL(createAccountsTable)
 
         // create data sample
-        db?.execSQL("INSERT INTO $tableAlarm ($tableAlarmMeal, $tableAlarmCalories, " +
-                "$tableAlarmFat, $tableAlarmProtein, $tableAlarmCarbs, $tableAlarmTime ) " +
-                "VALUES ('Chicken and Broccoli', 550, 2, 2, 2, 10800 )")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Ahri')")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Malphite')")
         // db?.execSQL("INSERT INTO $tableCharacter ($tableCharacterName) values ('Miss Fortune')")

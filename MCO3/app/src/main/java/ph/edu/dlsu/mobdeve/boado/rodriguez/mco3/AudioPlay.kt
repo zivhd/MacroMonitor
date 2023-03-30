@@ -1,4 +1,4 @@
-package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms
+package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
 
 

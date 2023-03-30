@@ -1,4 +1,4 @@
-package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.alarms
+package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -9,7 +9,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.ShowQR
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ItemAlarmBinding
@@ -33,18 +32,21 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
 
     inner class ViewHolder(private val itemBinding: ItemAlarmBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bindItems(alarm: alarm){
-            itemBinding.alarmName.text = alarm.meal
-            itemBinding.alarmCalories.text = alarm.calories.toString()  + " Calories"
+            val calories = alarm.calories
+            val meal = alarm.meal
+            val carbs = alarm.carbs
+            val fat = alarm.fat
+            val protein = alarm.protein
+            val time = alarm.time
+            itemBinding.alarmName.text = meal
+            itemBinding.alarmCalories.text = calories.toString() + " calories"
+            itemBinding.alarmCarbs.text = carbs.toString() + "g carbs"
+            itemBinding.alarmFat.text = fat.toString() + "g fat"
+            itemBinding.alarmProtein.text = protein.toString() + "g protein"
             itemBinding.alarmTime.text = convertSecondstoAMPM(alarm.time)
 
             itemBinding.QRBtn.setOnClickListener(){
                 val intent = Intent(context, ShowQR::class.java)
-                val calories = alarm.calories
-                val meal = alarm.meal
-                val carbs = alarm.carbs
-                val fat = alarm.fat
-                val protein = alarm.protein
-                val time = alarm.time
                 val ssid = "$calories$meal$carbs$fat$protein$time"
                 intent.putExtra("ssid",ssid)
                 this.itemView.context.startActivity(intent)

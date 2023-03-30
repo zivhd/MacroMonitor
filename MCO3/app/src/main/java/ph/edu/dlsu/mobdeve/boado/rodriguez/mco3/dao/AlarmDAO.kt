@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import android.util.Log
 import android.widget.Toast
 import kotlinx.coroutines.selects.select
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.alarm
@@ -55,10 +56,7 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
     @SuppressLint("Range")
     override fun getAlarm(userID: Int): ArrayList<alarm> {
         val alarmList: ArrayList<alarm> = ArrayList()
-        val selectQuery = "Select ${DatabaseHandlerAlarm.tableAlarmID}, ${DatabaseHandlerAlarm.tableAlarmCalories}," +
-                "${DatabaseHandlerAlarm.tableAlarmMeal}, " +
-                "${DatabaseHandlerAlarm.tableAlarmUserID}, " +
-                "${DatabaseHandlerAlarm.tableAlarmTime} " +
+        val selectQuery = "Select * " +
                 "FROM ${DatabaseHandlerAlarm.tableAlarm} WHERE ${DatabaseHandlerAlarm.tableAlarmUserID} = $userID  "
 
         val databaseHandlerAlarm:DatabaseHandlerAlarm = DatabaseHandlerAlarm(context)
@@ -72,6 +70,9 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
                 alarm.meal = result.getString(result.getColumnIndex(DatabaseHandlerAlarm.tableAlarmMeal))
                 alarm.time = result.getString(result.getColumnIndex(DatabaseHandlerAlarm.tableAlarmTime)).toInt()
                 alarm.calories = result.getString(result.getColumnIndex(DatabaseHandlerAlarm.tableAlarmCalories)).toInt()
+                alarm.fat = result.getString(result.getColumnIndex(DatabaseHandlerAlarm.tableAlarmFat)).toInt()
+                alarm.carbs = result.getString(result.getColumnIndex(DatabaseHandlerAlarm.tableAlarmCarbs)).toInt()
+                alarm.protein = result.getString(result.getColumnIndex(DatabaseHandlerAlarm.tableAlarmProtein)).toInt()
                 alarmList.add(alarm)
             } while(result.moveToNext())
         }
