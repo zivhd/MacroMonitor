@@ -7,6 +7,19 @@
     tools:context=".AddAlarm"
     android:background="@color/white">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EDIT ALARM"
+        android:textColor="#181823"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon" />
+
     <TimePicker
         android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
@@ -15,7 +28,7 @@
         android:headerBackground="#537FE7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         android:timePickerMode="spinner"/>
 
     <com.google.android.material.textfield.TextInputLayout

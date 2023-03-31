@@ -27,6 +27,12 @@ class EditAlarm : AppCompatActivity() {
         val context = this
         val db = DatabaseHandlerAlarm(context)
 
+        binding.caloriesText.setText(intent.getIntExtra("calories",0).toString())
+        binding.fatText.setText(intent.getIntExtra("fat",0).toString())
+        binding.carbsText.setText(intent.getIntExtra("carbs",0).toString())
+        binding.proteinText.setText(intent.getIntExtra("protein",0).toString())
+        binding.nameText.setText(intent.getStringExtra("meal"))
+
         val id = intent.getIntExtra("id",0)
         binding.saveBtn.setOnClickListener(){
             if(binding.caloriesText.text.toString().isNotEmpty() &&

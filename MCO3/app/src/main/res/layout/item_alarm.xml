@@ -96,7 +96,8 @@
             android:id="@+id/alarm_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center|right"
+            android:layout_gravity="center|right|top"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:text="00:00 PM"
             android:textColor="#181823"
@@ -105,6 +106,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/alarm_details"
             app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/edit_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center|right|bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
     </androidx.cardview.widget.CardView>
 
 
