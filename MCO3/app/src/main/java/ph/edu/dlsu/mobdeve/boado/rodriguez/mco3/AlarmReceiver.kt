@@ -39,7 +39,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context!!, "mco3")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(meal)
-            .setContentText("calories" + calories)
+            .setContentText("Time to Eat!")
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
