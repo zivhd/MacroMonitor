@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/home_btn"
+        android:id="@+id/samplegraph"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:src="@drawable/samplegraph"
