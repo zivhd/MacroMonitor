@@ -57,6 +57,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/home_btn"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/samplegraph"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mealheader"/>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="70dp"
