@@ -166,7 +166,7 @@ class StopAlarmActivity : AppCompatActivity() {
                         //
                         if(scannedValue == ssid){
                             cameraSource.stop()
-                            Toast.makeText(this@StopAlarmActivity, "value- $scannedValue", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@StopAlarmActivity, "Succesfully Scanned QR CODE ", Toast.LENGTH_LONG).show()
                             stopAlarm(alarmID,meal!!,carbs,fat,protein,time,calories)
 
 
@@ -176,7 +176,7 @@ class StopAlarmActivity : AppCompatActivity() {
                     }
                 }else
                 {
-                    Toast.makeText(this@StopAlarmActivity, "value- else", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@StopAlarmActivity, "Failed to Scan QR CODE", Toast.LENGTH_SHORT).show()
 
                 }
             }
