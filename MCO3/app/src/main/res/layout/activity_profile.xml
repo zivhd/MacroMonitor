@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
-    android:background="@color/white"
-    >
-
+    tools:context=".ProfileActivity">
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="150dp"
@@ -19,34 +16,12 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logout"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/logout"
 
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/profile"
-        android:layout_marginLeft="10dp"
-
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:src="@drawable/user"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WELCOME BACK, USER"
+        android:text="USER'S PROFILE PAGE"
         android:textColor="#181823"
         android:textStyle="bold"
         android:textSize="30dp"
@@ -56,10 +31,10 @@
         app:layout_constraintTop_toBottomOf="@+id/icon" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/mealheader"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meal Analytics"
+        android:text="Name: "
         android:textColor="#181823"
         android:textStyle="bold"
         android:textSize="20dp"
@@ -67,15 +42,19 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/samplegraph"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:src="@drawable/samplegraph"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: "
+        android:textColor="#181823"
+        android:textStyle="bold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mealheader"/>
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="70dp"

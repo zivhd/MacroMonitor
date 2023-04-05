@@ -23,6 +23,9 @@
         android:theme="@style/Theme.MCO3"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditAlarm"
             android:exported="false" />
         <activity

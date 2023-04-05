@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.UserDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityHomeBinding
-import java.util.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -69,7 +68,11 @@ class HomeActivity : AppCompatActivity() {
         binding.title.text = "WELCOME BACK, $fname"
 
 
-
+        binding.profile.setOnClickListener{
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         binding.logout.setOnClickListener{
             editor.putString("EMAIL", "")
             editor.putString("PASSWORD", "")
