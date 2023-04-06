@@ -39,7 +39,6 @@ class MealLogActivity : AppCompatActivity() {
         binding.caloriesList.adapter = caloriesAdapter
 
 
-
         binding.homeBtn.setOnClickListener(){
             val goToHome = Intent(this,HomeActivity::class.java)
             startActivity(goToHome)

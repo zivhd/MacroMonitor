@@ -9,6 +9,8 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.Calories
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ItemLogsBinding
@@ -19,6 +21,7 @@ class CaloriesAdapter(private val context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding = ItemLogsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(itemBinding)
     }
 
@@ -31,6 +34,8 @@ class CaloriesAdapter(private val context: Context,
     }
 
     inner class ViewHolder(private val itemBinding: ItemLogsBinding): RecyclerView.ViewHolder(itemBinding.root){
+
+
         fun bindItems(calories: Calories){
             val total = calories.totalCalories
             val meal = calories.meal
@@ -47,8 +52,16 @@ class CaloriesAdapter(private val context: Context,
             itemBinding.mealTime.text = convertSecondstoAMPM(time)
             Log.d("DATE",date)
             itemBinding.mealDate.text = date
+            val share = itemBinding.share
 
+            share.setOnClickListener{
+                val intent = Intent()
+                intent.action = Intent.ACTION_SEND
+                intent.putExtra(Intent.EXTRA_TEXT, "I just ate $meal and tracked it on MacroMonitor! (Calories: ${total.toString()} | Protein: ${protein.toString()}g | Carbohydrates: ${carbs.toString()}g | Fats: ${fat.toString()}g)")
+                intent.type = "text/plain"
 
+                context.startActivity(Intent.createChooser(intent, "Share to: "))
+            }
         }
     }
 
