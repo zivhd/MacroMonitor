@@ -6,9 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.UserDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityHomeBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -17,7 +22,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val date = Date()
+        val current = formatter.format(date)
         val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
         val editor = sharePreference.edit()
         var email = sharePreference.getString("EMAIL", "").toString()
@@ -30,6 +37,27 @@ class HomeActivity : AppCompatActivity() {
         var size = alarmList.size
         val dataIntent = Intent(this, AlarmReceiver::class.java)
 
+        val series: LineGraphSeries<DataPoint> = LineGraphSeries(
+            arrayOf(
+                // on below line we are adding
+                // each point on our x and y axis.
+                DataPoint(0.0, 1.0),
+                DataPoint(1.0, 3.0),
+                DataPoint(2.0, 4.0),
+                DataPoint(3.0, 9.0),
+                DataPoint(4.0, 6.0),
+                DataPoint(5.0, 3.0),
+                DataPoint(6.0, 6.0),
+                DataPoint(7.0, 1.0),
+                DataPoint(8.0, 2.0)
+            )
+        )
+        binding.calorieGraph.viewport.isScalable = true
+        binding.calorieGraph.viewport.isScrollable = true
+        binding.calorieGraph.viewport.setScalableY(true)
+        binding.calorieGraph.viewport.setScrollableY(true)
+        series.color = R.color.purple_200
+        binding.calorieGraph.addSeries(series)
 //        restarts all user's alarms
 //        for(i in 0 until size) {
 //            val calendar: Calendar = Calendar.getInstance().apply{
@@ -102,4 +130,5 @@ class HomeActivity : AppCompatActivity() {
             startActivity(goToMeal)
         }
     }
+
 }
