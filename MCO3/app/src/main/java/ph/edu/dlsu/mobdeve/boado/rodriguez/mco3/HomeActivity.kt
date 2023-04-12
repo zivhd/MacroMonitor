@@ -6,15 +6,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
+import com.github.mikephil.charting.animation.Easing
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.UserDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.databinding.ActivityHomeBinding
 import java.text.SimpleDateFormat
 import java.util.*
-
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.CaloriesDAOSQLLiteImplementation
+import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.Calories
+import kotlin.collections.ArrayList
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -22,9 +26,23 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val date = Date()
         val current = formatter.format(date)
+
+        val date1 = Date(System.currentTimeMillis() - (1000 * 60 * 60 * 24))
+        val date1str = formatter.format(date1)
+
+        val date2 = Date(System.currentTimeMillis() - 2*(1000 * 60 * 60 * 24))
+        val date2str = formatter.format(date2)
+
+        val date3 = Date(System.currentTimeMillis() - 3*(1000 * 60 * 60 * 24))
+        val date3str = formatter.format(date3)
+
+        val date4 = Date(System.currentTimeMillis() - 4*(1000 * 60 * 60 * 24))
+        val date4str = formatter.format(date4)
+
         val sharePreference = getSharedPreferences("MY_PRE", Context.MODE_PRIVATE)
         val editor = sharePreference.edit()
         var email = sharePreference.getString("EMAIL", "").toString()
@@ -37,20 +55,7 @@ class HomeActivity : AppCompatActivity() {
         var size = alarmList.size
         val dataIntent = Intent(this, AlarmReceiver::class.java)
 
-        val series: LineGraphSeries<DataPoint> = LineGraphSeries(
-            arrayOf(
-                // on below line we are adding
-                // each point on our x and y axis.
-                DataPoint(date, 1.0),
-                DataPoint(date, 3.0)
-            )
-        )
-        binding.calorieGraph.viewport.isScalable = true
-        binding.calorieGraph.viewport.isScrollable = true
-        binding.calorieGraph.viewport.setScalableY(true)
-        binding.calorieGraph.viewport.setScrollableY(true)
-        series.color = R.color.purple_200
-        binding.calorieGraph.addSeries(series)
+
 //        restarts all user's alarms
 //        for(i in 0 until size) {
 //            val calendar: Calendar = Calendar.getInstance().apply{
@@ -113,7 +118,48 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+// GRAPH
+        val entries = ArrayList<Entry>()
+//Part2
+        entries.add(Entry(1f, totalCal(date4str).toFloat()))
+        entries.add(Entry(2f, totalCal(date3str).toFloat()))
+        entries.add(Entry(3f, totalCal(date2str).toFloat()))
+        entries.add(Entry(4f, totalCal(date1str).toFloat()))
+        entries.add(Entry(5f, totalCal(current).toFloat()))
 
+//Part3
+        val vl = LineDataSet(entries, "Calories")
+
+
+//Part4
+        vl.setDrawValues(false)
+        vl.setDrawFilled(true)
+        vl.lineWidth = 3f
+        vl.fillColor = R.color.purple_200
+        vl.fillAlpha = R.color.black
+
+//Part5
+        binding.lineChart.xAxis.labelRotationAngle = 0f
+
+
+//Part6
+        binding.lineChart.data = LineData(vl)
+
+//Part7
+        binding.lineChart.axisRight.isEnabled = false
+
+//Part8
+        binding.lineChart.setTouchEnabled(true)
+        binding.lineChart.setPinchZoom(true)
+
+//Part9
+        binding.lineChart.description.text = "Days"
+        binding.lineChart.setNoDataText("No data yet!")
+
+//Part10
+        binding.lineChart.animateX(1800, Easing.EaseInExpo)
+
+//GRAPH
         binding.alarmBtn.setOnClickListener{
             val goToAlarm = Intent(this,AlarmActivity::class.java)
             startActivity(goToAlarm)
@@ -122,6 +168,16 @@ class HomeActivity : AppCompatActivity() {
             val goToMeal = Intent(this,MealLogActivity::class.java)
             startActivity(goToMeal)
         }
-    }
 
+    }
+    private fun totalCal(date: String): Int{
+        var Calories: ArrayList<Calories>
+        var cals = 0
+        val calDAO = CaloriesDAOSQLLiteImplementation(this)
+        Calories = calDAO.getCaloriesFromDate(date)
+        for(i in Calories){
+            cals = cals + i.totalCalories
+        }
+        return cals
+    }
 }

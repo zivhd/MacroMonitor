@@ -12,7 +12,7 @@ interface CaloriesDAO{
     fun removeCalories(caloriesID: Int)
 
     fun getCalories(userID: Int) : ArrayList<Calories>
-
+    fun getCaloriesFromDate(date: String) : ArrayList<Calories>
     fun updateCalories(calories: Calories)
 
 }
@@ -68,7 +68,32 @@ class CaloriesDAOSQLLiteImplementation(var context: Context) : CaloriesDAO {
         }
         return caloriesList
     }
+    @SuppressLint("Range")
+    override fun getCaloriesFromDate(date: String): ArrayList<Calories> {
+        val caloriesList: ArrayList<Calories> = ArrayList()
+        val selectQuery = "SELECT * " +
+                "FROM ${DatabaseHandlerCalories.tableCalories} WHERE ${DatabaseHandlerCalories.tableCaloriesDate} = '$date'"
 
+        val databaseHandlerCalories:DatabaseHandlerCalories = DatabaseHandlerCalories(context)
+        val db = databaseHandlerCalories.readableDatabase
+        val result = db.rawQuery(selectQuery,null)
+
+        if(result.moveToFirst()){
+            do{
+                val calories = Calories(0)
+                calories.id = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesID)).toInt()
+                calories.meal = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesMeal))
+                calories.time = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesTime)).toInt()
+                calories.totalCalories = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesTotal)).toInt()
+                calories.totalCarbs = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesCarbs)).toInt()
+                calories.totalFat = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesFat)).toInt()
+                calories.totalProtein = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesProtein)).toInt()
+                calories.date = result.getString(result.getColumnIndex(DatabaseHandlerCalories.tableCaloriesDate))
+                caloriesList.add(calories)
+            }while(result.moveToNext())
+        }
+        return caloriesList
+    }
     override fun updateCalories(calories: Calories) {
         TODO("Not yet implemented")
     }
