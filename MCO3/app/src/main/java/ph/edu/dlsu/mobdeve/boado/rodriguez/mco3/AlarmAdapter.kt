@@ -53,10 +53,12 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
 
             }
 
-            itemBinding.editBtn.setOnClickListener(){
+            itemBinding.editBtn.setOnClickListener {
+                val position = adapterPosition
                 val intent = Intent(context, EditAlarm::class.java)
                 val id = alarm.id
                 intent.putExtra("ID",id)
+                intent.putExtra("position",position)
                 intent.putExtra("meal", meal)
                 intent.putExtra("calories", calories)
                 intent.putExtra("fat", fat)
@@ -71,9 +73,10 @@ private var alarmList: ArrayList<alarm>) : RecyclerView.Adapter<AlarmAdapter.Vie
         val pintent = PendingIntent.getBroadcast(context, alarmList[position].id, intent, FLAG_IMMUTABLE)
         val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         alarmDAO.removeAlarm(alarmList[position].id)
+        alarmManager!!.cancel(pintent)
+        pintent.cancel()
         alarmList.removeAt(position)
         notifyItemRemoved(position)
-        alarmManager!!.cancel(pintent)
     }
 
     fun convertSecondstoAMPM(time : Int): String{

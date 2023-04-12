@@ -3,6 +3,7 @@ package ph.edu.dlsu.mobdeve.boado.rodriguez.mco3
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
