@@ -66,12 +66,12 @@ class QRCodeActivity : AppCompatActivity() {
         Log.d("minute", minute.toString())
         Log.d("timeinmillis", calendar.timeInMillis.toString())
 
-        val id = intent.getIntExtra("id",0)
+        val position = intent.getIntExtra("position",-1)
 
         alarmAdapter = AlarmAdapter(applicationContext,alarmDAO.getAlarm(userID))
         val ssid = "$calories$meal$carbs$fat$protein$time"
         binding.idIVQrcode.setImageBitmap(getQrCodeBitmap(ssid))
-
+        alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
 
         binding.saveAlarm.setOnClickListener(){
         alarm.calories = calories
@@ -80,14 +80,14 @@ class QRCodeActivity : AppCompatActivity() {
         alarm.fat = fat
         alarm.protein = protein
         alarm.time = time
-            if(id != 0)
-                alarmAdapter!!.deleteAlarm(id)
+            if(position != -1){
+                alarmAdapter!!.deleteAlarm(position)
+            }
         alarmDAO.addAlarm(alarm,userID)
 
 
-            //CURRENTLY THE QR CODE THING DOES NOT SAVE
+
             val intentList = ArrayList<PendingIntent>()
-            alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
             val dataIntent = Intent(this@QRCodeActivity, AlarmReceiver::class.java)
             dataIntent.putExtra("meal", meal)
             dataIntent.putExtra("calories", calories)

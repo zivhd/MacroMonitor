@@ -42,10 +42,9 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
         var databaseHandlerAlarm: DatabaseHandlerAlarm = DatabaseHandlerAlarm(context)
         val db = databaseHandlerAlarm.writableDatabase
 
-        val success = db.delete(DatabaseHandlerAlarm.tableAlarm,
+        db.delete(DatabaseHandlerAlarm.tableAlarm,
             "${DatabaseHandlerAlarm.tableAlarmID}=$alarmID",
             null)
-
         db.close()
     }
 

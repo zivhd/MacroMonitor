@@ -44,6 +44,7 @@ class EditAlarm : AppCompatActivity() {
                 val hour = binding.timePicker1.currentHour * 3600
                 val minutes = binding.timePicker1.currentMinute * 60
                 val time = hour + minutes
+                val position = intent.getIntExtra("position",0)
                 val goToQR = Intent(this,QRCodeActivity::class.java)
                 goToQR.putExtra("calories", binding.caloriesText.text.toString())
                 goToQR.putExtra("meal",binding.nameText.text.toString())
@@ -53,6 +54,7 @@ class EditAlarm : AppCompatActivity() {
                 goToQR.putExtra("time",time.toString())
                 goToQR.putExtra("hour",binding.timePicker1.currentHour)
                 goToQR.putExtra("minute",binding.timePicker1.currentMinute)
+                goToQR.putExtra("position",position)
                 goToQR.putExtra("id",id)
                 startActivity(goToQR)
                 finish()
