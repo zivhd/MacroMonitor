@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.animation.Easing
@@ -16,6 +17,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.CaloriesDAOSQLLiteImplementation
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.data.model.Calories
 import kotlin.collections.ArrayList
@@ -119,13 +121,22 @@ class HomeActivity : AppCompatActivity() {
             finish()
         }
 // GRAPH
-        val entries = ArrayList<Entry>()
+        val xValues = listOf(date4str, date3str, date2str, date1str, current)
+        val yValues = listOf(totalCal(date4str).toFloat(), totalCal(date3str).toFloat(),
+            totalCal(date2str).toFloat(), totalCal(date1str).toFloat(), totalCal(current).toFloat())
+        val entries = mutableListOf<Entry>()
+        for (i in yValues.indices) {
+            entries.add(Entry(i.toFloat(), yValues[i]))
+        }
+        val xAxisFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                return xValues.getOrNull(value.toInt()) ?: value.toString()
+            }
+        }
+        binding.lineChart.xAxis.valueFormatter = xAxisFormatter
 //Part2
-        entries.add(Entry(1f, totalCal(date4str).toFloat()))
-        entries.add(Entry(2f, totalCal(date3str).toFloat()))
-        entries.add(Entry(3f, totalCal(date2str).toFloat()))
-        entries.add(Entry(4f, totalCal(date1str).toFloat()))
-        entries.add(Entry(5f, totalCal(current).toFloat()))
+
+
 
 //Part3
         val vl = LineDataSet(entries, "Calories")
@@ -153,13 +164,62 @@ class HomeActivity : AppCompatActivity() {
         binding.lineChart.setPinchZoom(true)
 
 //Part9
-        binding.lineChart.description.text = "Days"
         binding.lineChart.setNoDataText("No data yet!")
 
 //Part10
         binding.lineChart.animateX(1800, Easing.EaseInExpo)
 
 //GRAPH
+
+//MACROS
+
+        val xValues1 = listOf(date4str, date3str, date2str, date1str, current)
+        val yValues1 = listOf(totalPro(date4str).toFloat(), totalPro(date3str).toFloat(), totalPro(date2str).toFloat(), totalPro(date1str).toFloat(), totalPro(current).toFloat())
+
+
+        val xValues2 = listOf(date4str, date3str, date2str, date1str, current)
+        val yValues2 = listOf(totalFat(date4str).toFloat(), totalFat(date3str).toFloat(), totalFat(date2str).toFloat(), totalFat(date1str).toFloat(), totalFat(current).toFloat())
+
+        val xValues3 = listOf(date4str, date3str, date2str, date1str, current)
+        val yValues3 = listOf(totalCarbs(date4str).toFloat(), totalCarbs(date3str).toFloat(), totalCarbs(date2str).toFloat(), totalCarbs(date1str).toFloat(), totalCarbs(current).toFloat())
+
+        val entries1 = mutableListOf<Entry>()
+        for (i in yValues1.indices) {
+            entries1.add(Entry(i.toFloat(), yValues1[i]))
+        }
+
+
+        val entries2 = mutableListOf<Entry>()
+        for (i in yValues2.indices) {
+            entries2.add(Entry(i.toFloat(), yValues2[i]))
+        }
+
+        val entries3 = mutableListOf<Entry>()
+        for (i in yValues3.indices) {
+            entries3.add(Entry(i.toFloat(), yValues3[i]))
+        }
+
+        val dataSet1 = LineDataSet(entries1, "PROTEIN")
+        val dataSet2 = LineDataSet(entries2, "FAT")
+        val dataSet3 = LineDataSet(entries3, "CARBS")
+
+        dataSet1.setColors(Color.RED)
+        dataSet2.setColors(Color.BLUE)
+        dataSet3.setColors(Color.GREEN)
+
+        val lineData = LineData(dataSet1, dataSet2, dataSet3)
+
+
+        binding.macroChart.data = lineData
+
+
+        val xAxisFormatter1 = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                val xValues = if (value < xValues1.size) xValues1 else xValues2
+                return xValues.getOrNull(value.toInt()) ?: value.toString()
+            }
+        }
+        binding.macroChart.xAxis.valueFormatter = xAxisFormatter1
         binding.alarmBtn.setOnClickListener{
             val goToAlarm = Intent(this,AlarmActivity::class.java)
             startActivity(goToAlarm)
@@ -169,6 +229,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(goToMeal)
         }
 
+
     }
     private fun totalCal(date: String): Int{
         var Calories: ArrayList<Calories>
@@ -177,6 +238,36 @@ class HomeActivity : AppCompatActivity() {
         Calories = calDAO.getCaloriesFromDate(date)
         for(i in Calories){
             cals = cals + i.totalCalories
+        }
+        return cals
+    }
+    private fun totalPro(date: String): Int{
+        var Calories: ArrayList<Calories>
+        var cals = 0
+        val calDAO = CaloriesDAOSQLLiteImplementation(this)
+        Calories = calDAO.getCaloriesFromDate(date)
+        for(i in Calories){
+            cals = cals + i.totalProtein
+        }
+        return cals
+    }
+    private fun totalFat(date: String): Int{
+        var Calories: ArrayList<Calories>
+        var cals = 0
+        val calDAO = CaloriesDAOSQLLiteImplementation(this)
+        Calories = calDAO.getCaloriesFromDate(date)
+        for(i in Calories){
+            cals = cals + i.totalFat
+        }
+        return cals
+    }
+    private fun totalCarbs(date: String): Int{
+        var Calories: ArrayList<Calories>
+        var cals = 0
+        val calDAO = CaloriesDAOSQLLiteImplementation(this)
+        Calories = calDAO.getCaloriesFromDate(date)
+        for(i in Calories){
+            cals = cals + i.totalCarbs
         }
         return cals
     }
