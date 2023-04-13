@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.animation.Easing
 import ph.edu.dlsu.mobdeve.boado.rodriguez.mco3.dao.AlarmDAOSQLLiteImplementation
@@ -58,55 +59,21 @@ class HomeActivity : AppCompatActivity() {
         val dataIntent = Intent(this, AlarmReceiver::class.java)
 
 
-//        restarts all user's alarms
-//        for(i in 0 until size) {
-//            val calendar: Calendar = Calendar.getInstance().apply{
-//                timeInMillis = System.currentTimeMillis()
-//                set(Calendar.HOUR_OF_DAY, alarmList[i].time/3600)
-//                set(Calendar.MINUTE, alarmList[i].time/60)
-//                set(Calendar.SECOND,0)
-//                set(Calendar.MILLISECOND,0)
-//
-//            }
-//            val intentList = ArrayList<PendingIntent>()
-//            val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
-//            val dataIntent = Intent(this, AlarmReceiver::class.java)
-//            dataIntent.putExtra("meal", alarmList[i].meal)
-//            dataIntent.putExtra("calories", alarmList[i].calories)
-//            dataIntent.putExtra("carbs", alarmList[i].carbs)
-//            dataIntent.putExtra("fat", alarmList[i].fat)
-//            dataIntent.putExtra("protein", alarmList[i].protein)
-//            dataIntent.putExtra("time", alarmList[i].time)
-//            val pendingIntent = PendingIntent.getBroadcast(this, alarmDAO.getAlarm(userID)[i].id, dataIntent,
-//                PendingIntent.FLAG_IMMUTABLE
-//            )
-//            intentList.add(pendingIntent)
-//            alarmManager?.setRepeating(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.timeInMillis,
-//                1000 * 60 * 24,
-//                pendingIntent
-//            )
-//        }
-
-
-
+        //restarts all user's alarms
 
 
         binding.title.text = "WELCOME BACK, $fname"
 
-
         binding.profile.setOnClickListener{
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
-            finish()
         }
         binding.logout.setOnClickListener{
             editor.putString("EMAIL", "")
             editor.putString("PASSWORD", "")
             editor.apply()
             val intent = Intent(this, MainActivity::class.java)
-
+            intent.putExtra("check",-1)
             //cancels all user alarms
            for(i in 0 until size) {
                val pintent = PendingIntent.getBroadcast(
@@ -116,10 +83,10 @@ class HomeActivity : AppCompatActivity() {
                val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
                alarmManager!!.cancel(pintent)
            }
-
             startActivity(intent)
             finish()
         }
+
 // GRAPH
         val xValues = listOf(date4str, date3str, date2str, date1str, current)
         val yValues = listOf(totalCal(date4str).toFloat(), totalCal(date3str).toFloat(),

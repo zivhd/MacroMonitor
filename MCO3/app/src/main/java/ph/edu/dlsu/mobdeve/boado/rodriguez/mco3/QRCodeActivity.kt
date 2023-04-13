@@ -53,13 +53,16 @@ class QRCodeActivity : AppCompatActivity() {
         val time = intent.getStringExtra("time")!!.toInt()
         val hour = intent.getIntExtra("hour",0)
         val minute = intent.getIntExtra("minute",0)
-
         val calendar: Calendar = Calendar.getInstance().apply{
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, hour)
             set(Calendar.MINUTE, minute)
             set(Calendar.SECOND,0)
             set(Calendar.MILLISECOND,0)
+        }
+        Log.d("calendar diff",calendar.before(Calendar.getInstance()).toString())
+        if(calendar.before(Calendar.getInstance())){
+            calendar.add(Calendar.DATE,1)
         }
 
         Log.d("HOUR", hour.toString())
@@ -80,9 +83,11 @@ class QRCodeActivity : AppCompatActivity() {
         alarm.fat = fat
         alarm.protein = protein
         alarm.time = time
+
             if(position != -1){
                 alarmAdapter!!.deleteAlarm(position)
             }
+
         alarmDAO.addAlarm(alarm,userID)
 
 
@@ -97,6 +102,7 @@ class QRCodeActivity : AppCompatActivity() {
             dataIntent.putExtra("time", time)
             dataIntent.putExtra("id",alarmDAO.getAlarm(userID).last().id)
             val pendingIntent = PendingIntent.getBroadcast(this@QRCodeActivity, alarmDAO.getAlarm(userID).last().id, dataIntent, FLAG_IMMUTABLE)
+
             intentList.add(pendingIntent)
             alarmManager?.setRepeating(
                 AlarmManager.RTC_WAKEUP,
@@ -104,11 +110,10 @@ class QRCodeActivity : AppCompatActivity() {
                 1000 * 60 * 24,
                 pendingIntent
             )
-
+            Log.d("ID of new alarm",(alarmDAO.getAlarm(userID).last().id.toString()))
             val gotoAlarmActivity = Intent(this,AlarmActivity::class.java)
             startActivity(gotoAlarmActivity)
             finish()
-
         }
 
 

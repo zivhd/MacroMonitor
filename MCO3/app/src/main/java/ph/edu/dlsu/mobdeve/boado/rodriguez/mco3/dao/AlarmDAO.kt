@@ -36,6 +36,7 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
         else {
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
         }
+        db.close()
     }
 
     override fun removeAlarm(alarmID: Int) {
@@ -75,7 +76,7 @@ class AlarmDAOSQLLiteImplementation(var context: Context) : AlarmDAO{
                 alarmList.add(alarm)
             } while(result.moveToNext())
         }
-
+        db.close()
         return alarmList
 
     }

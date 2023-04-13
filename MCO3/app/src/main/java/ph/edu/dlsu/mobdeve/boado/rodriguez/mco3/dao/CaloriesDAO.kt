@@ -36,6 +36,7 @@ class CaloriesDAOSQLLiteImplementation(var context: Context) : CaloriesDAO {
         if(result==(0).toLong())
             Toast.makeText(context,"Failed to log meal", Toast.LENGTH_LONG).show()
         else Toast.makeText(context,"Succesfully logged meal", Toast.LENGTH_LONG).show()
+        db.close()
     }
 
     override fun removeCalories(caloriesID: Int) {
@@ -66,7 +67,9 @@ class CaloriesDAOSQLLiteImplementation(var context: Context) : CaloriesDAO {
                 caloriesList.add(calories)
             }while(result.moveToNext())
         }
+        db.close()
         return caloriesList
+
     }
     @SuppressLint("Range")
     override fun getCaloriesFromDate(date: String): ArrayList<Calories> {
@@ -92,6 +95,7 @@ class CaloriesDAOSQLLiteImplementation(var context: Context) : CaloriesDAO {
                 caloriesList.add(calories)
             }while(result.moveToNext())
         }
+        db.close()
         return caloriesList
     }
     override fun updateCalories(calories: Calories) {
