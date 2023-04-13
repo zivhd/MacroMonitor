@@ -1,7 +1,12 @@
-# MacroTracker by Ziv and Seifer
-- Made for Mobile Development Course
+# MacroMonitor by Ziv and Seifer
 
-- Make alarms that tracks your meals and macronutrients. Forces you to track and finish your meals through an annoying alarm that can only be disabled through a random qr code challenge. Has analytics that show your macronutrients consumption per week as well as the ability to share your progress and meals through social media.
+- An app that helps you monitor your meal/macronutrients.
+
+  - Share your meals/analytics 
+
+  - Make alarms that tracks your meals and macronutrients. 
+
+  - Force yourself to 'get' to your meal by having a QR code challenge to stop that annoying alarm!
 
 - Make sure to edit your local.properties when first running the project
 
