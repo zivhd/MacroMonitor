@@ -1,12 +1,10 @@
 # MacroMonitor by Ziv and Seifer
 
-- An app that helps you monitor your meal/macronutrients.
+- An app that helps you monitor your meal/macronutrients through alarms and graphs.
 
-  - Share your meals/analytics 
-
-  - Make alarms that tracks your meals and macronutrients. 
-
-  - Force yourself to 'get' to your meal by having a QR code challenge to stop that annoying alarm!
+## Reminders
 
 - Make sure to edit your local.properties when first running the project
+- Fully tested on API 28
+- Allow notification permission
 
